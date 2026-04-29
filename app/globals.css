@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Background général */
+body {
+  margin: 0;
+  background: radial-gradient(circle at top, #0f1b3d, #050816 70%);
+  color: white;
+  min-height: 100vh;
+  overflow-x: hidden; /* Empêche le scroll horizontal seulement */
+  overflow-y: auto;   /* Permet le scroll vertical si besoin */
+}
+
+/* Glow FIFA */
+.glow {
+  box-shadow:
+    0 0 10px rgba(0, 224, 255, 0.4),
+    0 0 20px rgba(0, 224, 255, 0.2);
+}
+
+/* Scrollbar invisible mobile */
+::-webkit-scrollbar {
+  display: none;
+}

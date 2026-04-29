@@ -1,0 +1,42 @@
+# --- SECURITE & SECRETS ---
+# Ne jamais décocher ces lignes. Elles cachent tes clés API et mots de passe.
+.env
+.env*.local
+*.pem
+*.key
+
+# --- DEPENDANCES ---
+# On cache le dossier qui contient les bibliothèques (très lourd)
+node_modules/
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# --- BUILDS & CACHE ---
+# On cache les dossiers générés automatiquement par Next.js et Vercel
+.next/
+/out/
+/build
+.vercel
+*.tsbuildinfo
+
+# --- LOGS & DEBUG ---
+# On cache les rapports d'erreurs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# --- SYSTEME & IDE ---
+# On cache les fichiers inutiles créés par Windows, Mac ou VS Code
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# --- TESTS ---
+/coverage
