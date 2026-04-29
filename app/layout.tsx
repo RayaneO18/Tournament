@@ -3,7 +3,7 @@ import Container from "@/components/Container";
 import Navbar from "@/components/Navbar";
 
 export const metadata = {
-  title: "Ton Site FIFA",
+  title: "Tournoi Vercingertorix 2026",
   description: "Calendrier et Poules",
 };
 
