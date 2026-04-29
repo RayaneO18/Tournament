@@ -22,7 +22,7 @@ export default function CoupeCPPage() {
   }, []);
 
   const equipesCalculees = donneesEquipes.map(equipe => {
-    const points = (equipe.g * 3) + (equipe.n * 2) + (equipe.p * 1);
+    const points = (equipe.g * 4) + (equipe.n * 2) + (equipe.p * 1);
     const diff = equipe.bp - equipe.bc;
 
     return {
@@ -96,7 +96,7 @@ export default function CoupeCPPage() {
 
         <div className={styles.legendContainer}>
           <div className={styles.legendGrid}>
-            <div className={styles.legendItem}><strong>G</strong> Gagné (3 pts)</div>
+            <div className={styles.legendItem}><strong>G</strong> Gagné (4 pts)</div>
             <div className={styles.legendItem}><strong>N</strong> Nul (2 pts)</div>
             <div className={styles.legendItem}><strong>P</strong> Perdu (1 pt)</div>
             <div className={styles.legendItem}><strong>BP</strong> Buts Pour</div>

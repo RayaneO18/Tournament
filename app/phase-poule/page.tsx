@@ -96,7 +96,7 @@ export default function GroupesPage() {
 
         <div className={styles.legendContainer}>
           <div className={styles.legendGrid}>
-            <div className={styles.legendItem}><strong>G</strong> Gagné (3 pts)</div>
+            <div className={styles.legendItem}><strong>G</strong> Gagné (4 pts)</div>
             <div className={styles.legendItem}><strong>N</strong> Nul (2 pts)</div>
             <div className={styles.legendItem}><strong>P</strong> Perdu (1 pt)</div>
             <div className={styles.legendItem}><strong>BP</strong> Buts Pour</div>

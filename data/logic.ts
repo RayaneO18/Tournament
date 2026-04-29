@@ -31,10 +31,10 @@ export const getStatsEquipes = () => {
           t2.bc += match.score1;
 
           if (match.score1 > match.score2) {
-            t1.g += 1; t1.pts += 3;
+            t1.g += 1; t1.pts += 4;
             t2.p += 1; t2.pts += 1;
           } else if (match.score1 < match.score2) {
-            t2.g += 1; t2.pts += 3;
+            t2.g += 1; t2.pts += 4;
             t1.p += 1; t1.pts += 1;
           } else {
             t1.n += 1; t1.pts += 2;

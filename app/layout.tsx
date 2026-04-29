@@ -1,4 +1,4 @@
-import "./globals.css";
+import "../app/globals.css";
 import Container from "@/components/Container";
 import Navbar from "@/components/Navbar"; // Importe ta nouvelle Navbar
 
