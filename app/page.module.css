@@ -365,26 +365,13 @@
 
 .calendarTeamName {
   font-weight: 600;
-  font-size: 0.85rem;
+  /* Réduit de 0.85rem à 0.75rem max, et de 0.70rem à 0.65rem min */
+  font-size: clamp(0.60rem, 1.8vw, 0.70rem); 
   color: white;
-  /* EMPECHE LE RETOUR À LA LIGNE AU MILIEU D'UN MOT */
-  white-space: nowrap; 
-  /* SI VRAIMENT TROP LONG, ON AJOUTE DES POINTS DE SUSPENSION AU LIEU DE COUPER */
-  text-overflow: ellipsis;
-  display: block;
-}
-
-/* Ajustement pour mobile pour être sûr que ça ne casse pas tout */
-@media (max-width: 768px) {
-  .calendarTeamName {
-    font-size: 0.7rem; /* On réduit un peu plus la taille sur petit écran */
-    white-space: nowrap;
-  }
-  
-  .teamTextWrapper {
-    min-width: 0; /* Important pour que l'ellipsis fonctionne */
-    flex: 1;
-  }
+  white-space: normal; 
+  word-break: keep-all; 
+  overflow-wrap: break-word;
+  line-height: 1.1;
 }
 
 .classSubtitle {
