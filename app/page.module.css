@@ -367,9 +367,24 @@
   font-weight: 600;
   font-size: 0.85rem;
   color: white;
-  /* PERMET LE RETOUR À LA LIGNE */
-  white-space: normal; 
-  word-wrap: break-word;
+  /* EMPECHE LE RETOUR À LA LIGNE AU MILIEU D'UN MOT */
+  white-space: nowrap; 
+  /* SI VRAIMENT TROP LONG, ON AJOUTE DES POINTS DE SUSPENSION AU LIEU DE COUPER */
+  text-overflow: ellipsis;
+  display: block;
+}
+
+/* Ajustement pour mobile pour être sûr que ça ne casse pas tout */
+@media (max-width: 768px) {
+  .calendarTeamName {
+    font-size: 0.7rem; /* On réduit un peu plus la taille sur petit écran */
+    white-space: nowrap;
+  }
+  
+  .teamTextWrapper {
+    min-width: 0; /* Important pour que l'ellipsis fonctionne */
+    flex: 1;
+  }
 }
 
 .classSubtitle {
