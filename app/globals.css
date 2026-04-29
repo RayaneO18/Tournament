@@ -2,14 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  background-color: #050816; 
+  overscroll-behavior: none;
+}
+
 /* Background général */
 body {
   margin: 0;
-  background: radial-gradient(circle at top, #0f1b3d, #050816 70%);
+  /* On met le gradient en 'fixed' pour qu'il ne bouge pas si on tire sur la page */
+  background: radial-gradient(circle at top, #0f1b3d, #050816 70%) no-repeat fixed;
   color: white;
   min-height: 100vh;
-  overflow-x: hidden; /* Empêche le scroll horizontal seulement */
-  overflow-y: auto;   /* Permet le scroll vertical si besoin */
+  /* Empêche le scroll horizontal */
+  overflow-x: hidden; 
+  /* Permet le scroll vertical propre */
+  overflow-y: auto;
+  /* Optionnel : lisse le scroll sur iOS */
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Glow FIFA */
