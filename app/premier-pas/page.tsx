@@ -5,9 +5,9 @@ import styles from "../page.module.css";
 
 export default function CoupeCPPage() {
   const donneesEquipes = [
-    { pays: "France", classe: "CPA", g: 0, n: 0, p: 0, bp: 0, bc: 0, flag: "france.png" },
+    { pays: "France", classe: "CPA", g: 0, n: 0, p: 0, bp: 0, bc: 0, flag: "France.png" },
     { pays: "Japon", classe: "CPB", g: 0, n: 0, p: 0, bp: 0, bc: 0, flag: "japon.png" },
-    { pays: "Allemagne", classe: "CPC", g: 0, n: 0, p: 0, bp: 0, bc: 0, flag: "allemagne.png" },
+    { pays: "Allemagne", classe: "CPC", g: 0, n: 0, p: 0, bp: 0, bc: 0, flag: "Allemagne.png" },
   ];
 
   const [opacity, setOpacity] = useState(1);
