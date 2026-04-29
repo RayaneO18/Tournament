@@ -3,22 +3,17 @@
 @tailwind utilities;
 
 html {
+  overscroll-behavior-y: contain; 
   background-color: #050816; 
-  overscroll-behavior: none;
 }
 
-/* Background général */
 body {
   margin: 0;
-  /* On met le gradient en 'fixed' pour qu'il ne bouge pas si on tire sur la page */
-  background: radial-gradient(circle at top, #0f1b3d, #050816 70%) no-repeat fixed;
+  background: radial-gradient(circle at top, #0f1b3d, #050816 70%);
   color: white;
   min-height: 100vh;
-  /* Empêche le scroll horizontal */
-  overflow-x: hidden; 
-  /* Permet le scroll vertical propre */
-  overflow-y: auto;
-  /* Optionnel : lisse le scroll sur iOS */
+  overflow-x: hidden;
+  /* On s'assure que le scroll est fluide */
   -webkit-overflow-scrolling: touch;
 }
 
