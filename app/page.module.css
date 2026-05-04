@@ -176,7 +176,6 @@
 
 
 
-/* --- CONTENEUR PRINCIPAL --- */
 .navbar {
   width: 100%;
   position: fixed;
@@ -487,7 +486,7 @@
   }
 
   .teamSide {
-    gap: 50px; /* On garde un peu d'espace */
+    gap: 5px; /* On garde un peu d'espace */
   }
 
   .calendarFlag, .unknownFlag {
@@ -688,6 +687,7 @@
 }
 
 .cardDimmed {
+  opacity: 0.6;
   border-style: dashed;
 }
 

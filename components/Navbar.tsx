@@ -20,12 +20,10 @@ export default function Navbar() {
       <div className={styles.navInner}>
         {tabs.map((tab) => {
           const active = pathname === tab.href;
-
           return (
             <Link key={tab.href} href={tab.href} className={styles.navLink}>
               <div className={active ? styles.activeText : styles.inactiveText}>
                 {tab.name}
-                {/* Le trait ne s'affiche que si l'onglet est actif, sans animation complexe */}
                 {active && <div className={styles.underline} />}
               </div>
             </Link>
