@@ -185,9 +185,9 @@
   z-index: 1000;
   display: flex;
   justify-content: center;
+  /* Fond transparent comme demandé */
   background-color: transparent; 
   transition: background-color 0.3s ease;
-  /* On s'assure que rien ne dépasse verticalement */
   overflow: hidden; 
 }
 
@@ -195,38 +195,42 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  /* On aligne à gauche sur mobile pour permettre le scroll naturel */
-  justify-content: flex-start; 
   gap: 2rem; 
   padding: 1.5rem 1.5rem;
   width: 100%;
   max-width: 1200px;
   
-  /* --- MAGIE DU SCROLL HORIZONTAL --- */
+  /* --- LA SOLUTION POUR IPAD MINI & TOUT ÉCRAN --- */
+  /* On autorise le scroll */
   overflow-x: auto;
   white-space: nowrap;
-  /* Fluidité du scroll sur mobile */
   -webkit-overflow-scrolling: touch; 
-  /* On cache la barre de scroll visuelle sur Chrome/Safari/Firefox */
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE/Edge */
+  scrollbar-width: none;
+  
+  /* On utilise justify-content center par défaut */
+  justify-content: center;
 }
 
-/* On cache la barre de scroll sur Chrome/Safari/Edge */
+/* L'astuce cruciale : on ajoute des espaces flexibles invisibles 
+   qui ne s'activent que si le contenu déborde */
+.navInner::before,
+.navInner::after {
+  content: "";
+  margin: auto;
+}
+
 .navInner::-webkit-scrollbar {
   display: none;
 }
 
-/* --- LIENS --- */
 .navLink {
   text-decoration: none !important;
   color: white;
-  /* Empêche absolument le texte de revenir à la ligne */
   display: inline-block;
   white-space: nowrap;
-  font-size: 1rem; /* On garde une taille fixe confortable */
+  font-size: 1rem;
+  flex-shrink: 0; /* Empêche le texte de s'écraser sur iPad */
   -webkit-tap-highlight-color: transparent;
-  flex-shrink: 0; /* Empêche le lien de rétrécir */
 }
 
 .activeText {
@@ -243,7 +247,6 @@
   padding-bottom: 5px;
 }
 
-/* --- TRAIT BLEU --- */
 .underline {
   position: absolute;
   left: 0;
@@ -254,15 +257,6 @@
   box-shadow: 0 0 10px rgba(34, 211, 238, 0.8);
   border-radius: 2px;
 }
-
-/* --- AJUSTEMENT PC --- */
-@media (min-width: 769px) {
-  .navInner {
-    justify-content: center; /* On recentre sur grand écran */
-    padding: 1.5rem 1rem;
-  }
-}
-
 /* ==========================================================================
    2.CALENDRIER 
    ========================================================================== */
@@ -493,7 +487,7 @@
   }
 
   .teamSide {
-    gap: 5px; /* On garde un peu d'espace */
+    gap: 50px; /* On garde un peu d'espace */
   }
 
   .calendarFlag, .unknownFlag {
