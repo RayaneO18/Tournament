@@ -1,4 +1,37 @@
-export const groupesBase = [
+// Définition des types pour un code propre et sans erreurs TypeScript
+export interface Equipe {
+  pays: string;
+  flag: string;
+  classe: string;
+}
+
+export interface Groupe {
+  nom: string;
+  equipes: Equipe[];
+}
+
+export interface Match {
+  eq1: string;
+  score1: number | null;
+  eq2: string;
+  score2: number | null;
+  poule: string;
+}
+
+export interface Rencontre {
+  jour: string;
+  date: string;
+  matchs: Match[];
+  isFerie?: boolean;
+}
+
+export interface Semaine {
+  semaine: string;
+  rencontres: Rencontre[];
+}
+
+// Données des Groupes
+export const groupesBase: Groupe[] = [
   {
     nom: "Poule 1",
     equipes: [
@@ -34,50 +67,51 @@ export const groupesBase = [
   },
 ];
 
-export const calendrierMatchs = [
+// Données du Calendrier
+export const calendrierMatchs: Semaine[] = [
   {
     semaine: "Semaine du 4 Mai au 8 Mai",
     rencontres: [
-      { jour: "Lundi", date: "4 Mai", eq1: "Allemagne", score1: null, eq2: "Portugal", score2: null, poule: "Poule 1" },
-      { jour: "Mardi", date: "5 Mai", eq1: "Etats-Unis", score1: null, eq2: "Panama", score2: null, poule: "Poule 2" },
-      { jour: "Jeudi", date: "7 Mai", eq1: "France", score1: null, eq2: "Argentine", score2: null, poule: "Poule 3" },
-      { jour: "Vendredi", date: "8 Mai", eq1: "?", score1: null, eq2: "?", score2: null, poule: "Férié" },
+      { jour: "Lundi", date: "4 Mai", matchs: [{ eq1: "Allemagne", score1: null, eq2: "Portugal", score2: null, poule: "Poule 1" }] },
+      { jour: "Mardi", date: "5 Mai", matchs: [{ eq1: "Etats-Unis", score1: null, eq2: "Panama", score2: null, poule: "Poule 2" }] },
+      { jour: "Jeudi", date: "7 Mai", matchs: [{ eq1: "France", score1: null, eq2: "Argentine", score2: null, poule: "Poule 3" }] },
+      { jour: "Vendredi", date: "8 Mai", isFerie: true, matchs: [] },
     ]
   },
   {
     semaine: "Semaine du 11 Mai au 15 Mai",
     rencontres: [
-      { jour: "Lundi", date: "11 Mai", eq1: "Brésil", score1: null, eq2: "Angleterre", score2: null, poule: "Poule 4" },
-      { jour: "Mardi", date: "12 Mai", eq1: "Allemagne", score1: null, eq2: "Algérie", score2: null, poule: "Poule 1" },
-      { jour: "Jeudi", date: "14 Mai", eq1: "?", score1: null, eq2: "?", score2: null, poule: "Férié" },
-      { jour: "Vendredi", date: "15 Mai", eq1: "?", score1: null, eq2: "?", score2: null, poule: "Férié" },
+      { jour: "Lundi", date: "11 Mai", matchs: [{ eq1: "Brésil", score1: null, eq2: "Angleterre", score2: null, poule: "Poule 4" },{ eq1: "Allemagne", score1: null, eq2: "Portugal", score2: null, poule: "Poule 1" }] },
+      { jour: "Mardi", date: "12 Mai", matchs: [{ eq1: "Allemagne", score1: null, eq2: "Algérie", score2: null, poule: "Poule 1" }] },
+      { jour: "Jeudi", date: "14 Mai", isFerie: true, matchs: [] },
+      { jour: "Vendredi", date: "15 Mai", isFerie: true, matchs: [] },
     ]
   },
   {
     semaine: "Semaine du 18 Mai au 22 Mai",
     rencontres: [
-      { jour: "Lundi", date: "18 Mai", eq1: "Etats-Unis", score1: null, eq2: "Maroc", score2: null, poule: "Poule 2" },
-      { jour: "Mardi", date: "19 Mai", eq1: "Nouvelle-Zélande", score1: null, eq2: "France", score2: null, poule: "Poule 3" },
-      { jour: "Jeudi", date: "21 Mai", eq1: "Brésil", score1: null, eq2: "Espagne", score2: null, poule: "Poule 4" },
-      { jour: "Vendredi", date: "22 Mai", eq1: "Allemagne", score1: null, eq2: "Japon", score2: null, poule: "Poule 1" },
+      { jour: "Lundi", date: "18 Mai", matchs: [{ eq1: "Etats-Unis", score1: null, eq2: "Maroc", score2: null, poule: "Poule 2" }] },
+      { jour: "Mardi", date: "19 Mai", matchs: [{ eq1: "Nouvelle-Zélande", score1: null, eq2: "France", score2: null, poule: "Poule 3" }] },
+      { jour: "Jeudi", date: "21 Mai", matchs: [{ eq1: "Brésil", score1: null, eq2: "Espagne", score2: null, poule: "Poule 4" }] },
+      { jour: "Vendredi", date: "22 Mai", matchs: [{ eq1: "Allemagne", score1: null, eq2: "Japon", score2: null, poule: "Poule 1" }] },
     ]
   },
   {
     semaine: "Semaine du 25 Mai au 29 Mai",
     rencontres: [
-      { jour: "Lundi", date: "25 Mai", eq1: "?", score1: null, eq2: "?", score2: null, poule: "Férié" },
-      { jour: "Mardi", date: "26 Mai", eq1: "Maroc", score1: null, eq2: "Panama", score2: null, poule: "Poule 2" },
-      { jour: "Jeudi", date: "28 Mai", eq1: "Nouvelle-Zélande", score1: null, eq2: "Argentine", score2: null, poule: "Poule 3" },
-      { jour: "Vendredi", date: "29 Mai", eq1: "Espagne", score1: null, eq2: "Angleterre", score2: null, poule: "Poule 4" },
+      { jour: "Lundi", date: "25 Mai", isFerie: true, matchs: [] },
+      { jour: "Mardi", date: "26 Mai", matchs: [{ eq1: "Maroc", score1: null, eq2: "Panama", score2: null, poule: "Poule 2" }] },
+      { jour: "Jeudi", date: "28 Mai", matchs: [{ eq1: "Nouvelle-Zélande", score1: null, eq2: "Argentine", score2: null, poule: "Poule 3" }] },
+      { jour: "Vendredi", date: "29 Mai", matchs: [{ eq1: "Espagne", score1: null, eq2: "Angleterre", score2: null, poule: "Poule 4" }] },
     ]
   },
   {
-    semaine: "Semaine du 1 juin au 5 juin",
+    semaine: "Semaine du 1 Juin au 5 Juin",
     rencontres: [
-      { jour: "Lundi", date: "1 juin", eq1: "Algérie", score1: null, eq2: "Japon", score2: null, poule: "Poule 1" },
-      { jour: "Mardi", date: "2 juin", eq1: "Portugal", score1: null, eq2: "Japon", score2: null, poule: "Poule 1" },
-      { jour: "Jeudi", date: "4 juin", eq1: "Portugal", score1: null, eq2: "Algérie", score2: null, poule: "Poule 1" },
-      { jour: "Vendredi", date: "5 juin", eq1: "Etats-Unis", score1: null, eq2: "Panama", score2: null, poule: "Poule 2" },
+      { jour: "Lundi", date: "1 juin", matchs: [{ eq1: "Algérie", score1: null, eq2: "Japon", score2: null, poule: "Poule 1" }] },
+      { jour: "Mardi", date: "2 juin", matchs: [{ eq1: "Portugal", score1: null, eq2: "Japon", score2: null, poule: "Poule 1" }] },
+      { jour: "Jeudi", date: "4 juin", matchs: [{ eq1: "Portugal", score1: null, eq2: "Algérie", score2: null, poule: "Poule 1" }] },
+      { jour: "Vendredi", date: "5 juin", matchs: [{ eq1: "Etats-Unis", score1: null, eq2: "Panama", score2: null, poule: "Poule 2" }] },
     ]
   }
 ];
