@@ -3,8 +3,11 @@
 @tailwind utilities;
 
 html {
-  overscroll-behavior-y: contain; 
+  /* On garde ton réglage */
+  overscroll-behavior-y: none; 
   background-color: #050816; 
+  /* On force le scroll sur l'élément racine pour tes animations scroll(root) */
+  height: 100%;
 }
 
 body {
@@ -13,7 +16,9 @@ body {
   color: white;
   min-height: 100vh;
   overflow-x: hidden;
-  /* On s'assure que le scroll est fluide */
+  
+  /* CRUCIAL POUR IOS : On empêche le rebond élastique sans bloquer le scroll */
+  position: relative;
   -webkit-overflow-scrolling: touch;
 }
 
@@ -24,7 +29,7 @@ body {
     0 0 20px rgba(0, 224, 255, 0.2);
 }
 
-/* Scrollbar invisible mobile */
+/* Scrollbar invisible */
 ::-webkit-scrollbar {
   display: none;
 }
