@@ -30,7 +30,7 @@ export default function Page() {
               <h3 className={styles.apercuRuleTitle}>Format des Matchs</h3>
             </div>
             <p className={styles.apercuRuleDescription}>
-              <strong>Durée :</strong> 15 min / 5 min (repos) / 15 min.
+              <strong>Durée :</strong> 10 min / 5 min (repos) / 10 min.
             </p>
             <p className={styles.apercuRuleDescription}>
               <strong>Effectif :</strong> 5 joueurs de base.
