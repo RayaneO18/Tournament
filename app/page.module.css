@@ -184,10 +184,9 @@
   z-index: 1000;
   display: flex;
   justify-content: center;
-  /* Fond transparent comme demandé */
   background-color: transparent; 
   transition: background-color 0.3s ease;
-  overflow: hidden; 
+  /* On enlève overflow: hidden ici pour ne pas bloquer le scroll de l'enfant */
 }
 
 .navInner {
@@ -195,27 +194,26 @@
   flex-direction: row;
   align-items: center;
   gap: 2rem; 
-  padding: 1.5rem 1.5rem;
+  padding: 1.5rem 2rem; /* Ajout d'un padding latéral de sécurité */
   width: 100%;
   max-width: 1200px;
   
-  /* --- LA SOLUTION POUR IPAD MINI & TOUT ÉCRAN --- */
-  /* On autorise le scroll */
+  /* --- CORRECTION SCROLL GAUCHE --- */
   overflow-x: auto;
   white-space: nowrap;
   -webkit-overflow-scrolling: touch; 
   scrollbar-width: none;
   
-  /* On utilise justify-content center par défaut */
-  justify-content: center;
+  /* On remplace justify-content: center par flex-start 
+     pour éviter que le début soit coupé sur petit écran */
+  justify-content: flex-start;
 }
 
-/* L'astuce cruciale : on ajoute des espaces flexibles invisibles 
-   qui ne s'activent que si le contenu déborde */
-.navInner::before,
-.navInner::after {
-  content: "";
-  margin: auto;
+/* Sur les écrans larges, on centre à nouveau */
+@media (min-width: 800px) {
+  .navInner {
+    justify-content: center;
+  }
 }
 
 .navInner::-webkit-scrollbar {
@@ -228,10 +226,11 @@
   display: inline-block;
   white-space: nowrap;
   font-size: 1rem;
-  flex-shrink: 0; /* Empêche le texte de s'écraser sur iPad */
+  flex-shrink: 0; 
   -webkit-tap-highlight-color: transparent;
 }
 
+/* On garde le reste du style identique (activeText, underline, etc.) */
 .activeText {
   color: #22d3ee;
   font-weight: 600;
@@ -256,6 +255,7 @@
   box-shadow: 0 0 10px rgba(34, 211, 238, 0.8);
   border-radius: 2px;
 }
+
 /* ==========================================================================
    2.CALENDRIER 
    ========================================================================== */
