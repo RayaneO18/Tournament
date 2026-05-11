@@ -120,7 +120,7 @@ const Calendrier = () => {
                     <div className={styles.matchFooter}>
                       <span className={styles.pouleIndicator}>
                         {jour.isFerie && "REPOS"}
-                        {jour.isReporte && "DATE À DÉFINIR"}
+                        {jour.isReporte && "Pas de match"}
                         {jour.isTirageAuSort && "PHASE FINALE"}
                       </span>
                     </div>

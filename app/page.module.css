@@ -186,7 +186,6 @@
   justify-content: center;
   background-color: transparent; 
   transition: background-color 0.3s ease;
-  /* On enlève overflow: hidden ici pour ne pas bloquer le scroll de l'enfant */
 }
 
 .navInner {

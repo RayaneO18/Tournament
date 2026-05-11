@@ -13,7 +13,9 @@ export default function Page() {
       <div className={styles.apercuUpdateBox}>
         <span className={styles.apercuInfoEmoji}>⚠️</span>
         <p className={styles.apercuUpdateText}>
-          <strong>Note importante :</strong> Cet espace centralise toutes les alertes du tournoi : modifications de match, annulations pour cause d'intempéries ou absence créant un manque d'effectif.
+          <strong>Note importante :</strong>Cet espace centralise toutes les alertes du tournoi : modifications de match, annulations pour cause d'intempéries ou absence créant un manque d'effectif.
+          <br></br>
+          ☔ Matchs déplacés à cause de la pluie : certaines journées compteront 2 rencontres (2 matchs en 1 jour).
         </p>
       </div>
 
