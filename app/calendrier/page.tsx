@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import styles from "../page.module.css";
-// On importe bien les interfaces exportées
 import { groupesBase, calendrierMatchs, Rencontre, Match, Semaine } from "../../data/data";
 
 const Calendrier = () => {
@@ -19,46 +18,58 @@ const Calendrier = () => {
 
   if (!mounted) return null;
 
-  return (
+ return (
     <div className={styles.container}>
       <header className="pt-32">
         <h1 className={styles.title}>Calendrier</h1>
       </header>
 
       <div className={styles.weeksGrid}>
-        {/* On vérifie que calendrierMatchs existe avant de map */}
         {calendrierMatchs?.map((sem: Semaine, idx: number) => (
           <div key={idx} className={styles.weekSection}>
             <h2 className={styles.weekTitle}>{sem.semaine}</h2>
 
-            {/* On vérifie que sem.rencontres existe */}
-            {sem.rencontres?.map((jour: Rencontre, jIdx: number) => (
-              ((jour.matchs && jour.matchs.length > 0) || jour.isFerie) && (
-                <div key={jIdx} className={`${styles.matchCard} ${jour.isFerie ? styles.ferieCard : ""}`}>
+            {sem.rencontres?.map((jour: Rencontre, jIdx: number) => {
+              // On affiche la carte si : il y a des matchs OU c'est férié OU reporté OU tirage au sort
+              const hasContent = (jour.matchs && jour.matchs.length > 0) || jour.isFerie || jour.isReporte || jour.isTirageAuSort;
+
+              if (!hasContent) return null;
+
+              return (
+                <div key={jIdx} className={`
+                  ${styles.matchCard} 
+                  ${jour.isFerie ? styles.noMatchCard : ""} 
+                  ${jour.isReporte ? styles.reporteCard : ""}
+                  ${jour.isTirageAuSort ? styles.tirageCard : ""}
+                `}>
                   
                   <div className={styles.matchHeader}>
                     <span className={styles.dayInfo}>{jour.jour}</span>
                     <span className={styles.dateInfo}>{jour.date} 2026</span>
                   </div>
 
-                  {jour.isFerie ? (
+                  {/* CAS SPÉCIAUX (Férié, Reporté, Tirage) */}
+                  {(jour.isFerie || jour.isReporte || jour.isTirageAuSort) ? (
                     <div className={styles.matchBody}>
-                      <div className={styles.ferieLabelContainer}>
-                        <span className={styles.ferieLabel}>Jour Férié</span>
+                      <div className={styles.noMatchLabelContainer}>
+                        <span className={styles.noMatchLabel}>
+                          {jour.isFerie && "Jour Férié"}
+                          {jour.isReporte && "Match Reporté"}
+                          {jour.isTirageAuSort && "Tirage au Sort"}
+                        </span>
                       </div>
                     </div>
                   ) : (
+                    /* CAS MATCHS NORMAUX */
                     jour.matchs.map((m: Match, mIdx: number) => {
                       const info1 = getEquipeInfo(m.eq1);
                       const info2 = getEquipeInfo(m.eq2);
 
                       return (
                         <div key={mIdx}>
-                          {/* Trait de séparation bleu si c'est le second match du jour */}
                           {mIdx > 0 && (
                             <div style={{ margin: "15px 35px", borderTop: "1px solid rgba(34, 211, 238, 0.4)", height: "0px" }} />
                           )}
-
                           <div className={styles.matchBody}>
                             <div className={`${styles.teamSide} ${styles.leftSide}`}>
                               <div className={styles.teamTextWrapper}>
@@ -103,19 +114,24 @@ const Calendrier = () => {
                       );
                     })
                   )}
-                  {jour.isFerie && (
+
+                  {/* FOOTER POUR LES ÉTATS SPÉCIAUX */}
+                  {(jour.isFerie || jour.isReporte || jour.isTirageAuSort) && (
                     <div className={styles.matchFooter}>
-                      <span className={styles.pouleIndicator}>REPOS</span>
+                      <span className={styles.pouleIndicator}>
+                        {jour.isFerie && "REPOS"}
+                        {jour.isReporte && "DATE À DÉFINIR"}
+                        {jour.isTirageAuSort && "PHASE FINALE"}
+                      </span>
                     </div>
                   )}
                 </div>
-              )
-            ))}
+              );
+            })}
           </div>
         ))}
       </div>
     </div>
   );
 };
-
 export default Calendrier;

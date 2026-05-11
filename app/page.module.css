@@ -440,20 +440,20 @@
 }
 
 /* Style pour la case Férié */
-.ferieCard {
+.noMatchCard {
   background: rgba(255, 255, 255, 0.03) !important;
   border: 1px dashed rgba(255, 255, 255, 0.2) !important;
   opacity: 0.7;
 }
 
-.ferieLabelContainer {
+.noMatchLabelContainer {
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.ferieLabel {
+.noMatchLabel {
   font-weight: 800;
   color: #22d3ee; /* Bleu néon comme tes titres */
   text-transform: uppercase;
