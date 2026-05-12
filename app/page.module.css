@@ -460,6 +460,13 @@
   font-size: 1.1rem;
   text-shadow: 0 0 10px rgba(34, 211, 238, 0.4);
 }
+.forfaitTag {
+  font-size: 0.55rem;
+  color: #ef4444;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
 
 /* --- RESPONSIVE --- */
 

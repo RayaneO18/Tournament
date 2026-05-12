@@ -18,7 +18,7 @@ const Calendrier = () => {
 
   if (!mounted) return null;
 
- return (
+  return (
     <div className={styles.container}>
       <header className="pt-32">
         <h1 className={styles.title}>Calendrier</h1>
@@ -30,7 +30,6 @@ const Calendrier = () => {
             <h2 className={styles.weekTitle}>{sem.semaine}</h2>
 
             {sem.rencontres?.map((jour: Rencontre, jIdx: number) => {
-              // On affiche la carte si : il y a des matchs OU c'est férié OU reporté OU tirage au sort
               const hasContent = (jour.matchs && jour.matchs.length > 0) || jour.isFerie || jour.isReporte || jour.isTirageAuSort;
 
               if (!hasContent) return null;
@@ -48,7 +47,6 @@ const Calendrier = () => {
                     <span className={styles.dateInfo}>{jour.date} 2026</span>
                   </div>
 
-                  {/* CAS SPÉCIAUX (Férié, Reporté, Tirage) */}
                   {(jour.isFerie || jour.isReporte || jour.isTirageAuSort) ? (
                     <div className={styles.matchBody}>
                       <div className={styles.noMatchLabelContainer}>
@@ -60,7 +58,6 @@ const Calendrier = () => {
                       </div>
                     </div>
                   ) : (
-                    /* CAS MATCHS NORMAUX */
                     jour.matchs.map((m: Match, mIdx: number) => {
                       const info1 = getEquipeInfo(m.eq1);
                       const info2 = getEquipeInfo(m.eq2);
@@ -83,12 +80,26 @@ const Calendrier = () => {
                               )}
                             </div>
 
-                            <div className={styles.scoreBlock}>
+                            <div className={styles.scoreBlock} style={{ flexDirection: 'column', gap: '2px' }}>
                               {m.score1 !== null ? (
                                 <>
-                                  <span className={styles.scoreValue}>{m.score1}</span>
-                                  <span className={styles.scoreDivider}>-</span>
-                                  <span className={styles.scoreValue}>{m.score2}</span>
+                                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                    <span className={styles.scoreValue}>{m.score1}</span>
+                                    <span className={styles.scoreDivider}>-</span>
+                                    <span className={styles.scoreValue}>{m.score2}</span>
+                                  </div>
+                                  {/* Label Forfait sous le score */}
+                                  {m.isForfait && (
+                                    <span style={{ 
+                                      fontSize: '0.55rem', 
+                                      color: '#ef4444', 
+                                      fontWeight: 'bold',
+                                      textTransform: 'uppercase',
+                                      letterSpacing: '0.5px'
+                                    }}>
+                                      Forfait
+                                    </span>
+                                  )}
                                 </>
                               ) : (
                                 <span className={styles.vsLabel}>VS</span>
@@ -115,7 +126,6 @@ const Calendrier = () => {
                     })
                   )}
 
-                  {/* FOOTER POUR LES ÉTATS SPÉCIAUX */}
                   {(jour.isFerie || jour.isReporte || jour.isTirageAuSort) && (
                     <div className={styles.matchFooter}>
                       <span className={styles.pouleIndicator}>
