@@ -85,7 +85,7 @@ export const calendrierMatchs: Semaine[] = [
 {
     semaine: "Semaine du 18 Mai au 22 Mai",
     rencontres: [
-      { jour: "Lundi", date: "18 Mai", matchs: [{ eq1: "Etats-Unis", score1: null, eq2: "Maroc", score2: null, poule: "Poule 2" }, { eq1: "France", score1: null, eq2: "Argentine", score2: null, poule: "Poule 3" } ] },
+      { jour: "Lundi", date: "18 Mai", matchs: [{ eq1: "Etats-Unis", score1: 3, eq2: "Maroc", score2: 1, poule: "Poule 2" }, { eq1: "France", score1: 0, eq2: "Argentine", score2: 2, poule: "Poule 3" } ] },
       { jour: "Mardi", date: "19 Mai", matchs: [{ eq1: "Etats-Unis", score1: null, eq2: "Panama", score2: null, poule: "Poule 2" }, { eq1: "Nouvelle-Zélande", score1: null, eq2: "France", score2: null, poule: "Poule 3" }] },
       { jour: "Jeudi", date: "21 Mai", matchs: [{ eq1: "Brésil", score1: null, eq2: "Espagne", score2: null, poule: "Poule 4" }] },
       { jour: "Vendredi", date: "22 Mai", matchs: [{ eq1: "Allemagne", score1: null, eq2: "Japon", score2: null, poule: "Poule 1" }, { eq1: "Brésil", score1: null, eq2: "Angleterre", score2: null, poule: "Poule 4" }] },
