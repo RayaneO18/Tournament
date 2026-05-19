@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation"; 
 import styles from "../page.module.css";
 
 const donneesEquipes = [
@@ -25,6 +26,7 @@ interface Match {
 
 export default function PhaseFinale() {
   const [mounted, setMounted] = useState(false);
+  const router = useRouter(); 
 
   const [quarts] = useState<Match[]>([
     { t1: "", s1: 0, tab1: 0, t2: "", s2: 0, tab2: 0 },
@@ -41,7 +43,17 @@ export default function PhaseFinale() {
   const [finale] = useState<Match>({ t1: "", s1: 0, tab1: 0, t2: "", s2: 0, tab2: 0 });
   const [petiteFinale] = useState<Match>({ t1: "", s1: 0, tab1: 0, t2: "", s2: 0, tab2: 0 });
 
-  useEffect(() => { setMounted(true); }, []);
+  useEffect(() => { 
+    setMounted(true); 
+
+  
+    const intervalle = setInterval(() => {
+      router.refresh();
+    }, 180000);
+
+    return () => clearInterval(intervalle);
+  }, [router]); 
+
   if (!mounted) return null;
 
   // --- LOGIQUE DE CALCUL DES RÉSULTATS ---

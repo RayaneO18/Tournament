@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation"; 
 import styles from "../page.module.css";
 import { groupesBase, calendrierMatchs, Rencontre, Match, Semaine } from "../../data/data";
 
@@ -8,10 +9,17 @@ export const dynamic = "force-dynamic";
 
 const Calendrier = () => {
   const [mounted, setMounted] = useState(false);
+  const router = useRouter(); 
 
   useEffect(() => {
     setMounted(true);
-  }, []);
+
+    const intervalle = setInterval(() => {
+      router.refresh();
+    }, 180000);
+
+    return () => clearInterval(intervalle);
+  }, [router]);
 
   const getEquipeInfo = (nomPays: string) => {
     if (nomPays === "?" || !nomPays) return { flag: null, classe: "" };
@@ -90,7 +98,6 @@ const Calendrier = () => {
                                     <span className={styles.scoreDivider}>-</span>
                                     <span className={styles.scoreValue}>{m.score2}</span>
                                   </div>
-                                  {/* Label Forfait sous le score */}
                                   {m.isForfait && (
                                     <span style={{ 
                                       fontSize: '0.55rem', 

@@ -1,26 +1,35 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation"; 
 import styles from "../page.module.css";
 import { getStatsEquipes } from "../../data/logic"; 
 
 export const dynamic = "force-dynamic";
 
 export default function GroupesPage() {
-  // On initialise l'état avec les statistiques calculées dynamiquement
+  const router = useRouter(); 
   const [groupesDynamiques, setGroupesDynamiques] = useState(getStatsEquipes());
   const [opacity, setOpacity] = useState(1);
 
-  // Gestion de la transparence du titre au scroll
   useEffect(() => {
+    // 1. Gestion du scroll
     const handleScroll = () => {
       const newOpacity = Math.max(1 - window.scrollY / 80, 0);
       setOpacity(newOpacity);
     };
-
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+
+    const intervalle = setInterval(() => {
+      router.refresh();
+      setGroupesDynamiques(getStatsEquipes());
+    }, 180000);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      clearInterval(intervalle);
+    };
+  }, [router]);
 
   return (
     <div className={styles.container}>

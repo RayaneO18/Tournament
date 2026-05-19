@@ -1,9 +1,13 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation"; 
 import styles from "../page.module.css";
 
+export const dynamic = "force-dynamic"; 
+
 export default function CoupeCPPage() {
+  const router = useRouter(); 
   const donneesEquipes = [
     { pays: "France", classe: "CPA", g: 0, n: 0, p: 0, bp: 0, bc: 0, flag: "France.png" },
     { pays: "Japon", classe: "CPB", g: 0, n: 0, p: 0, bp: 0, bc: 0, flag: "Japon.png" },
@@ -13,13 +17,23 @@ export default function CoupeCPPage() {
   const [opacity, setOpacity] = useState(1);
 
   useEffect(() => {
+
     const handleScroll = () => {
       const newOpacity = Math.max(1 - window.scrollY / 80, 0);
       setOpacity(newOpacity);
     };
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+
+
+    const intervalle = setInterval(() => {
+      router.refresh();
+    }, 180000);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      clearInterval(intervalle);
+    };
+  }, [router]);
 
   const equipesCalculees = donneesEquipes.map(equipe => {
     const points = (equipe.g * 4) + (equipe.n * 2) + (equipe.p * 1);
@@ -33,7 +47,7 @@ export default function CoupeCPPage() {
   });
 
   const equipesTriees = [...equipesCalculees].sort((a, b) => {
-    if (b.pts !== a.pts) return b.pts - a.pts; // Priorité aux points
+    if (b.pts !== a.pts) return b.pts - a.pts;
     return b.diff - a.diff;
   });
 
