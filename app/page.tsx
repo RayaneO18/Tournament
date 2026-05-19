@@ -18,7 +18,7 @@ export default function Page() {
           ☔ Certains matchs ont été déplacés en raison de la pluie : certaines journées compteront deux rencontres (deux matchs par jour).
           <br></br>
           <br></br>
-Mise à jour 19/05 : En raison des intempéries, les matchs du 19/05 ainsi que d'autres rencontres ont dû être déplacés. Veuillez consulter le nouveau calendrier.
+        Mise à jour 19/05 : En raison des intempéries, les matchs du 19/05 ainsi que d'autres rencontres ont dû être déplacés. Veuillez consulter le nouveau calendrier.
         </p>
       </div>
       {/* SECTION DES RÈGLES */}

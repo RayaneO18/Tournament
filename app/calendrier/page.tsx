@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import styles from "../page.module.css";
 import { groupesBase, calendrierMatchs, Rencontre, Match, Semaine } from "../../data/data";
 
+export const dynamic = "force-dynamic";
+
 const Calendrier = () => {
   const [mounted, setMounted] = useState(false);
 

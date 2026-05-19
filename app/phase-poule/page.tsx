@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import styles from "../page.module.css";
 import { getStatsEquipes } from "../../data/logic"; 
 
+export const dynamic = "force-dynamic";
+
 export default function GroupesPage() {
   // On initialise l'état avec les statistiques calculées dynamiquement
   const [groupesDynamiques, setGroupesDynamiques] = useState(getStatsEquipes());
