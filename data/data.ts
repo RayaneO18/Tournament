@@ -1,4 +1,3 @@
-// Définition des types pour un code propre et sans erreurs TypeScript
 export interface Equipe {
   pays: string;
   flag: string;
@@ -88,7 +87,7 @@ export const calendrierMatchs: Semaine[] = [
       { jour: "Lundi", date: "18 Mai", matchs: [{ eq1: "Etats-Unis", score1: 3, eq2: "Maroc", score2: 1, poule: "Poule 2" }, { eq1: "France", score1: 0, eq2: "Argentine", score2: 2, poule: "Poule 3" } ] },
       { jour: "Mardi", date: "19 Mai", isReporte: true, matchs: [] },
       { jour: "Jeudi", date: "21 Mai", matchs: [{ eq1: "Nouvelle-Zélande", score1: 1, eq2: "France", score2: 4, poule: "Poule 3" }, { eq1: "Brésil", score1: 0, eq2: "Angleterre", score2: 2, poule: "Poule 4" }] },
-      { jour: "Vendredi", date: "22 Mai", matchs: [{ eq1: "Etats-Unis", score1: null, eq2: "Panama", score2: null, poule: "Poule 2" }, { eq1: "Brésil", score1: null, eq2: "Espagne", score2: null, poule: "Poule 4" }] },
+      { jour: "Vendredi", date: "22 Mai", matchs: [{ eq1: "Etats-Unis", score1: 1, eq2: "Panama", score2: 0, poule: "Poule 2" }, { eq1: "Brésil", score1: 0, eq2: "Espagne", score2: 0, poule: "Poule 4" }] },
     ]
   },
   {
