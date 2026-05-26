@@ -50,7 +50,7 @@ export const groupesBase: Groupe[] = [
     equipes: [
       { pays: "Etats-Unis", flag: "Etats-unis.png", classe: "CE2C" },
       { pays: "Panama", flag: "Panama.png", classe: "CM1B" },
-      { pays: "Maroc", flag: "Maroc.png", classe: "ULISS" },
+      { pays: "Maroc", flag: "Maroc.png", classe: "ULIS" },
     ],
   },
   {
@@ -94,7 +94,7 @@ export const calendrierMatchs: Semaine[] = [
     semaine: "Semaine du 25 Mai au 29 Mai",
     rencontres: [
       { jour: "Lundi", date: "25 Mai", isFerie: true, matchs: [] },
-      { jour: "Mardi", date: "26 Mai", matchs: [{ eq1: "Allemagne", score1: null, eq2: "Japon", score2: null, poule: "Poule 1" }, { eq1: "Maroc", score1: null, eq2: "Panama", score2: null, poule: "Poule 2" }] },
+      { jour: "Mardi", date: "26 Mai", matchs: [{ eq1: "Allemagne", score1: 3, eq2: "Japon", score2: 1, poule: "Poule 1" }, { eq1: "Maroc", score1: 0, eq2: "Panama", score2: 3, poule: "Poule 2" }] },
       { jour: "Jeudi", date: "28 Mai", matchs: [{ eq1: "Espagne", score1: null, eq2: "Angleterre", score2: null, poule: "Poule 4" }] },
       { jour: "Vendredi", date: "29 Mai", matchs: [{ eq1: "Nouvelle-Zélande", score1: null, eq2: "Argentine", score2: null, poule: "Poule 3" }] },
     ]
