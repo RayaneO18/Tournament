@@ -19,6 +19,9 @@ export default function Page() {
           <br></br>
           <br></br>
         Mise à jour 19/05 : En raison des intempéries, les matchs du 19/05 ainsi que d'autres rencontres ont dû être déplacés. Veuillez consulter le nouveau calendrier.
+          <br></br>
+          <br></br>
+         Mise à jour 27/05 : En raison d'une sortie scolaire, les matchs du 01/06 et du 02/06 ont été inversés.
         </p>
       </div>
       {/* SECTION DES RÈGLES */}
