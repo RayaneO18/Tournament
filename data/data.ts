@@ -1,3 +1,5 @@
+// --- 1. VOS INTERFACES OFFICIELLES (Source unique de vérité) ---
+
 export interface Equipe {
   pays: string;
   flag: string;
@@ -12,11 +14,15 @@ export interface Groupe {
 export interface Match {
   eq1: string;
   score1: number | null;
+  tab1?: number| null;
   eq2: string;
   score2: number | null;
+  tab2?: number| null;     
   poule: string;
   isForfait?: boolean;
-  gagnantTAB?: string; // Ajouté pour le départage
+  gagnantTAB?: string; 
+  date?: string;       
+  label?: string;      
 }
 
 export interface Rencontre {
@@ -34,7 +40,8 @@ export interface Semaine {
   rencontres: Rencontre[];
 }
 
-// Données des Groupes
+// --- 2. DONNÉES DE LA PHASE DE POULE ---
+
 export const groupesBase: Groupe[] = [
   {
     nom: "Poule 1",
@@ -107,4 +114,28 @@ export const calendrierMatchs: Semaine[] = [
       { jour: "Jeudi", date: "4 juin", matchs: [{ eq1: "Portugal", score1: null, eq2: "Algérie", score2: null, poule: "Poule 1" }] },
       { jour: "Vendredi", date: "5 juin",isTirageAuSort: true, matchs: [] },    ]
   },
+];  
+
+// --- 3. DONNÉES DE LA PHASE FINALE (Même type 'Match') ---
+
+export const initialQuarts: Match[] = [
+  { eq1: "", score1: null, tab1: null, eq2: "", score2: null, tab2: null, poule: "Quart de finale", date: "8 Juin" },
+  { eq1: "", score1: null, tab1: null, eq2: "", score2: null, tab2: null, poule: "Quart de finale", date: "9 Juin" },
+  { eq1: "", score1: null, tab1: null, eq2: "", score2: null, tab2: null, poule: "Quart de finale", date: "11 Juin" },
+  { eq1: "", score1: null, tab1: null, eq2: "", score2: null, tab2: null, poule: "Quart de finale", date: "12 Juin" },
+];
+
+export const initialDemis: Match[] = [
+  { eq1: "", score1: null, tab1: null, eq2: "", score2: null, tab2: null, poule: "Demi-finale", date: "15 Juin" },
+  { eq1: "", score1: null, tab1: null, eq2: "", score2: null, tab2: null, poule: "Demi-finale", date: "16 Juin" },
+];
+
+export const initialFinale: Match = { eq1: "", score1: null, tab1: null, eq2: "", score2: null, tab2: null, poule: "Finale", date: "26 Juin" };
+
+export const initialPetiteFinale: Match = { eq1: "", score1: null, tab1: null, eq2: "", score2: null, tab2: null, poule: "3ème place", date: "23 Juin" };
+
+export const initialMatchsSpeciaux: Match[] = [
+  { eq1: "Animateurs", score1: null, eq2: "Parents", score2: null, poule: "Spécial", date: "19 Juin", label: "MATCH ALLER ANIMATEURS VS PARENTS" },
+  { eq1: "", score1: null, eq2: "", score2: null, poule: "Spécial", date: "22 Juin", label: "COUPE DU FAIR-PLAY" },
+  { eq1: "Parents", score1: null, eq2: "Animateurs", score2: null, poule: "Spécial", date: "25 Juin", label: "MATCH RETOUR ANIMATEURS VS PARENTS" }
 ];

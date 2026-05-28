@@ -1,5 +1,24 @@
-// app/data/logic.ts
-import { groupesBase, calendrierMatchs } from "./data";
+import { groupesBase, calendrierMatchs, Match } from "./data";
+
+// 1. On définit le tableau directement ici : cela casse définitivement la dépendance circulaire
+// et empêche le bug du "undefined (reading 'find')" au démarrage de Next.js !
+export const donneesEquipes = [
+  { pays: "France", flag: "France.png", classe: "CPA" },
+  { pays: "Japon", flag: "Japon.png", classe: "CPB" },
+  { pays: "Allemagne", flag: "Allemagne.png", classe: "CPC" },
+  { pays: "Maroc", flag: "Maroc.png", classe: "ULISS" },
+  { pays: "Espagne", flag: "Espagne.png", classe: "CE1A" },
+  { pays: "Argentine", flag: "Argentine.png", classe: "CE1B" },
+  { pays: "Brésil", flag: "Bresil.png", classe: "CE2A" },
+  { pays: "Nouvelle-Zélande", flag: "Nouvelle-zelande.png", classe: "CE2B" },
+  { pays: "Etats-Unis", flag: "Etats-Unis.png", classe: "CE2C" },
+  { pays: "Algérie", flag: "Algerie.png", classe: "CM1A" },
+  { pays: "Panama", flag: "Panama.png", classe: "CM1B" },
+  { pays: "Angleterre", flag: "Angleterre.png", classe: "CM2A" },
+  { pays: "Portugal", flag: "Portugal.png", classe: "CM2B" },
+  { pays: "Animateurs" },
+  { pays: "Parents" }
+];
 
 export const getStatsEquipes = () => {
   // 1. On prépare la structure avec des compteurs à zéro et l'état gagnantTAB
@@ -80,4 +99,32 @@ export const getStatsEquipes = () => {
   });
 
   return stats;
+};
+
+export const trouverEquipe = (nom: string) => {
+  return donneesEquipes.find(e => e.pays === nom);
+};
+
+export const getWinner = (m: Match): string | null => {
+  if (!m || !m.eq1 || !m.eq2) return null;
+  if (m.score1 === null || m.score2 === null) return null;
+
+  if (m.score1 > m.score2) return m.eq1;
+  if (m.score2 > m.score1) return m.eq2;
+  
+  // Gestion alternative avec vérification stricte (non null, non undefined)
+  if (m.tab1 !== undefined && m.tab1 !== null && m.tab2 !== undefined && m.tab2 !== null) {
+    if (m.tab1 > m.tab2) return m.eq1;
+    if (m.tab2 > m.tab1) return m.eq2;
+  }
+
+  if (m.gagnantTAB) return m.gagnantTAB;
+  return null;
+};
+
+export const getLoser = (m: Match): string | null => {
+  if (!m || !m.eq1 || !m.eq2) return null;
+  const winner = getWinner(m);
+  if (!winner) return null;
+  return winner === m.eq1 ? m.eq2 : m.eq1;
 };
