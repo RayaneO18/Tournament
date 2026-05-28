@@ -16,7 +16,7 @@ export interface Match {
   score2: number | null;
   poule: string;
   isForfait?: boolean;
-
+  gagnantTAB?: string; // Ajouté pour le départage
 }
 
 export interface Rencontre {
@@ -73,21 +73,21 @@ export const groupesBase: Groupe[] = [
 
 export const calendrierMatchs: Semaine[] = [
   {
-  semaine: "Semaine du 11 Mai au 15 Mai",
-  rencontres: [
-    { jour: "Lundi", date: "11 Mai", isReporte: true, matchs: [] },
-    { jour: "Mardi", date: "12 Mai", matchs: [{ eq1: "Allemagne", score1: 2, eq2: "Portugal", score2: 15, poule: "Poule 1" },{ eq1: "Allemagne", score1: 1, eq2: "Algérie", score2: 0, poule: "Poule 1", isForfait: true} ] },
-    { jour: "Jeudi", date: "14 Mai", isFerie: true, matchs: [] },
-    { jour: "Vendredi", date: "15 Mai", isFerie: true, matchs: [] },
-  ]
-},
-{
+    semaine: "Semaine du 11 Mai au 15 Mai",
+    rencontres: [
+      { jour: "Lundi", date: "11 Mai", isReporte: true, matchs: [] },
+      { jour: "Mardi", date: "12 Mai", matchs: [{ eq1: "Allemagne", score1: 2, eq2: "Portugal", score2: 15, poule: "Poule 1" },{ eq1: "Allemagne", score1: 1, eq2: "Algérie", score2: 0, poule: "Poule 1", isForfait: true} ] },
+      { jour: "Jeudi", date: "14 Mai", isFerie: true, matchs: [] },
+      { jour: "Vendredi", date: "15 Mai", isFerie: true, matchs: [] },
+    ]
+  },
+  {
     semaine: "Semaine du 18 Mai au 22 Mai",
     rencontres: [
       { jour: "Lundi", date: "18 Mai", matchs: [{ eq1: "Etats-Unis", score1: 3, eq2: "Maroc", score2: 1, poule: "Poule 2" }, { eq1: "France", score1: 0, eq2: "Argentine", score2: 2, poule: "Poule 3" } ] },
       { jour: "Mardi", date: "19 Mai", isReporte: true, matchs: [] },
       { jour: "Jeudi", date: "21 Mai", matchs: [{ eq1: "Nouvelle-Zélande", score1: 1, eq2: "France", score2: 4, poule: "Poule 3" }, { eq1: "Brésil", score1: 0, eq2: "Angleterre", score2: 2, poule: "Poule 4" }] },
-      { jour: "Vendredi", date: "22 Mai", matchs: [{ eq1: "Etats-Unis", score1: 1, eq2: "Panama", score2: 0, poule: "Poule 2" }, { eq1: "Brésil", score1: 0, eq2: "Espagne", score2: 0, poule: "Poule 4" }] },
+      { jour: "Vendredi", date: "22 Mai", matchs: [{ eq1: "Etats-Unis", score1: 1, eq2: "Panama", score2: 0, poule: "Poule 2" }, { eq1: "Brésil", score1: 0, eq2: "Espagne", score2: 0, poule: "Poule 4", gagnantTAB: "Espagne" }] },
     ]
   },
   {
@@ -95,7 +95,7 @@ export const calendrierMatchs: Semaine[] = [
     rencontres: [
       { jour: "Lundi", date: "25 Mai", isFerie: true, matchs: [] },
       { jour: "Mardi", date: "26 Mai", matchs: [{ eq1: "Allemagne", score1: 3, eq2: "Japon", score2: 1, poule: "Poule 1" }, { eq1: "Maroc", score1: 0, eq2: "Panama", score2: 3, poule: "Poule 2" }] },
-      { jour: "Jeudi", date: "28 Mai", matchs: [{ eq1: "Espagne", score1: null, eq2: "Angleterre", score2: null, poule: "Poule 4" }] },
+      { jour: "Jeudi", date: "28 Mai", matchs: [{ eq1: "Espagne", score1: 0, eq2: "Angleterre", score2: 2, poule: "Poule 4" }] },
       { jour: "Vendredi", date: "29 Mai", matchs: [{ eq1: "Nouvelle-Zélande", score1: null, eq2: "Argentine", score2: null, poule: "Poule 3" }] },
     ]
   },
@@ -107,5 +107,4 @@ export const calendrierMatchs: Semaine[] = [
       { jour: "Jeudi", date: "4 juin", matchs: [{ eq1: "Portugal", score1: null, eq2: "Algérie", score2: null, poule: "Poule 1" }] },
       { jour: "Vendredi", date: "5 juin",isTirageAuSort: true, matchs: [] },    ]
   },
-
 ];

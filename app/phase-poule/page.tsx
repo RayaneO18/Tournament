@@ -38,12 +38,19 @@ export default function GroupesPage() {
       <div className={styles.groupWrapper}>
         {groupesDynamiques.map((poule) => {
           
+          // Tri prenant en compte la règle de départage par TAB
           const equipesTriees = [...poule.equipes].sort((a, b) => {
             if (b.pts !== a.pts) return b.pts - a.pts;
 
             const diffA = a.bp - a.bc;
             const diffB = b.bp - b.bc;
-            return diffB - diffA;
+            if (diffB !== diffA) return diffB - diffA;
+
+            // Critère TAB de secours si les points et la diff de buts sont identiques
+            if (a.gagnantTAB && !b.gagnantTAB) return -1;
+            if (!a.gagnantTAB && b.gagnantTAB) return 1;
+
+            return 0;
           });
 
           return (
@@ -81,7 +88,15 @@ export default function GroupesPage() {
                                 />
                               </div>
                               <div className={styles.nameWrapper}>
-                                <span className={styles.name}>{equipe.pays}</span>
+                                {/* Utilisation des classes CSS pour l'alignement et le badge */}
+                                <div className={styles.nameRow}>
+                                  <span className={styles.name}>{equipe.pays}</span>
+                                  {equipe.gagnantTAB && (
+                                    <span className={styles.badgeTab}>
+                                      Gagnant TAB
+                                    </span>
+                                  )}
+                                </div>
                                 <span className={styles.subName}>{equipe.classe}</span>
                               </div>
                             </div>
@@ -106,15 +121,19 @@ export default function GroupesPage() {
         })}
 
         <div className={styles.legendContainer}>
-          <div className={styles.legendGrid}>
-            <div className={styles.legendItem}><strong>G</strong> Gagné (4 pts)</div>
-            <div className={styles.legendItem}><strong>N</strong> Nul (2 pts)</div>
-            <div className={styles.legendItem}><strong>P</strong> Perdu (1 pt)</div>
-            <div className={styles.legendItem}><strong>BP</strong> Buts Pour</div>
-            <div className={styles.legendItem}><strong>BC</strong> Buts Contre</div>
-            <div className={styles.legendItem}><strong>+/-</strong> Différence</div>
-          </div>
-        </div>
+  <div className={styles.legendGrid}>
+    <div className={styles.legendItem}><strong>G</strong> Gagné (4 pts)</div>
+    <div className={styles.legendItem}><strong>N</strong> Nul (2 pts)</div>
+    <div className={styles.legendItem}><strong>P</strong> Perdu (1 pt)</div>
+    <div className={styles.legendItem}><strong>BP</strong> Buts Pour</div>
+    <div className={styles.legendItem}><strong>BC</strong> Buts Contre</div>
+    <div className={styles.legendItem}><strong>+/-</strong> Différence</div>
+    <div className={`${styles.legendItem} ${styles.legendFullRow}`}>
+      <span className={styles.badgeTabLegend}>GAGNANT TAB</span>
+      Équipe devant au classement grâce à sa victoire aux tirs au but (en cas d'égalité parfaite).
+    </div>
+  </div>
+</div>
       </div>
     </div>
   );

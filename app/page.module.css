@@ -605,7 +605,26 @@
 
 .nameWrapper { display: flex; flex-direction: column; line-height: 1.2; }
 
+.nameRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .name { font-weight: 700; font-size: 0.95rem; white-space: nowrap; }
+
+/* Nouveau style pour le badge dans le tableau */
+.badgeTab {
+  background-color: #04752e;
+  color: #ffffff;
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  white-space: nowrap;
+  line-height: normal;
+}
 
 .subName { font-size: 0.75rem; color: rgba(255, 255, 255, 0.4); }
 
@@ -791,9 +810,35 @@
   gap: 1rem;
 }
 
-.legendItem { font-size: 0.8rem; color: rgba(255, 255, 255, 0.6); display: flex; align-items: center; gap: 0.8rem; }
+.legendItem { 
+  font-size: 0.8rem; 
+  color: rgba(255, 255, 255, 0.6); 
+  display: flex; 
+  align-items: center; 
+  gap: 0.8rem; 
+}
 
-.legendItem strong { color: #22d3ee; background: rgba(34, 211, 238, 0.1); padding: 2px 6px; border-radius: 4px; }
+.legendItem strong { 
+  color: #22d3ee; 
+  background: rgba(34, 211, 238, 0.1); 
+  padding: 2px 6px; 
+  border-radius: 4px; 
+}
+
+.legendFullRow {
+  grid-column: 1 / -1;
+  margin-top: 4px;
+}
+
+.badgeTabLegend {
+  background-color: #04752e;
+  color: #ffffff;
+  padding: 3px 6px;
+  border-radius: 4px;
+  font-size: 11px; 
+  font-weight: bold;
+  text-transform: uppercase;
+}
 
 /* ==========================================================================
    6. RESPONSIVE (MOBILE & TABLETTE)
