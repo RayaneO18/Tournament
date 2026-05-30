@@ -652,6 +652,18 @@ font-weight: bold;
   margin-bottom: 3rem;
 }
 
+/* Animation d'apparition fluide au chargement de la page */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .rowsWrapper {
   display: flex;
   flex-direction: column;
@@ -660,6 +672,7 @@ font-weight: bold;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px 80px 20px;
+  animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .stageRow {
@@ -714,19 +727,48 @@ font-weight: bold;
   padding: 16px;
   min-width: 220px;
   position: relative;
-  transition: transform 0.2s ease;
+  /* Ajout d'une transition plus douce et complète pour l'effet Hover */
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), 
+              box-shadow 0.3s ease, 
+              background-color 0.3s ease, 
+              border-color 0.3s ease;
+}
+
+/* Effet interactif moderne au survol des cartes */
+.matchCard:hover {
+  transform: translateY(-4px) scale(1.02);
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
 }
 
 .cardDimmed {
   border-style: dashed;
 }
 
+/* Animation de pulsation néon sur-mesure pour la Grande Finale */
+@keyframes finaleGlowPulse {
+  0% {
+    border-color: #22d3ee;
+    box-shadow: 0 0 20px rgba(34, 211, 238, 0.15);
+  }
+  100% {
+    border-color: #06b6d4;
+    box-shadow: 0 0 35px rgba(34, 211, 238, 0.45);
+  }
+}
+
 .featured {
   border: 2px solid #22d3ee;
-  background: rgba(34, 211, 238, 0.08);
-  box-shadow: 0 0 30px rgba(34, 211, 238, 0.2);
+  background: linear-gradient(135deg, rgba(34, 211, 238, 0.1) 0%, rgba(0, 0, 0, 0.3) 100%);
   min-width: 280px;
   overflow: hidden;
+  animation: finaleGlowPulse 2.5s ease-in-out infinite alternate;
+}
+
+.featured:hover {
+  transform: translateY(-5px) scale(1.03);
 }
 
 .specialCard {
@@ -818,8 +860,15 @@ font-weight: bold;
   font-size: 0.9rem;
 }
 
+/* Animation douce de respiration sur l'opacité des blocs en attente */
+@keyframes pulseWaiting {
+  0% { opacity: 0.35; }
+  100% { opacity: 0.7; }
+}
+
 .teamNameWaiting {
-  opacity: 0.5;
+  font-style: italic;
+  animation: pulseWaiting 2s ease-in-out infinite alternate;
 }
 
 .teamNameStaff {
@@ -871,28 +920,56 @@ font-weight: bold;
   border-radius: 50%;
 }
 
+/* Effet de lueur LED animée sur le voyant du vainqueur */
+@keyframes dotCyanPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 6px #22d3ee;
+  }
+  100% {
+    transform: scale(1.15);
+    box-shadow: 0 0 14px #22d3ee, 0 0 4px #22d3ee;
+  }
+}
+
 .dotCyan {
   width: 6px;
   height: 6px;
   background: #22d3ee;
   border-radius: 50%;
-  box-shadow: 0 0 8px #22d3ee;
+  animation: dotCyanPulse 1.5s ease-in-out infinite alternate;
 }
 
 .finalGlow {
   position: absolute;
   top: 0; left: 0; width: 100%; height: 100%;
-  background: radial-gradient(circle at center, rgba(34, 211, 238, 0.1), transparent);
+  background: radial-gradient(circle at center, rgba(34, 211, 238, 0.15), transparent);
   pointer-events: none;
+}
+
+/* Animation de lévitation fluide pour l'émoji Trophée */
+@keyframes floatTrophy {
+  0% {
+    transform: translateY(0px) scale(1);
+    filter: drop-shadow(0 2px 4px rgba(234, 179, 8, 0.3));
+  }
+  50% {
+    transform: translateY(-5px) scale(1.1);
+    filter: drop-shadow(0 6px 12px rgba(234, 179, 8, 0.6));
+  }
+  100% {
+    transform: translateY(0px) scale(1);
+    filter: drop-shadow(0 2px 4px rgba(234, 179, 8, 0.3));
+  }
 }
 
 .trophyIcon {
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   margin-top: 10px;
-  filter: drop-shadow(0 0 8px rgba(34, 211, 238, 0.6));
+  display: block;
+  animation: floatTrophy 2.5s ease-in-out infinite;
 }
-
 
 /* ==========================================================================
    5. LÉGENDE
