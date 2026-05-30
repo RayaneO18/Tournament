@@ -33,7 +33,7 @@ export default function GroupesPage() {
 
   return (
     <div className={styles.container}>
-        <h1 className={styles.title}> Classement des Groupes</h1>
+      <h1 className={styles.title}> Classement des Groupes</h1>
 
       <div className={styles.groupWrapper}>
         {groupesDynamiques.map((poule) => {
@@ -52,6 +52,16 @@ export default function GroupesPage() {
 
             return 0;
           });
+
+          // CALCUL DYNAMIQUE DU NOMBRE DE MATCHS ATTENDUS
+          // Si 4 équipes -> 12 entrées de stats cumulées (4 x 3 matchs)
+          // Si 3 équipes -> 6 entrées de stats cumulées (3 x 2 matchs)
+          const nbEquipes = poule.equipes.length;
+          const matchesAttendus = nbEquipes === 4 ? 12 : 6;
+
+          // Somme des matchs réellement joués (G + N + P) déclarés pour cette poule
+          const totalMatchsJoues = poule.equipes.reduce((acc, eq) => acc + eq.g + eq.n + eq.p, 0);
+          const pouleTerminee = totalMatchsJoues >= matchesAttendus;
 
           return (
             <div key={poule.nom} className={styles.tableContainer}>
@@ -74,10 +84,16 @@ export default function GroupesPage() {
                   <tbody>
                     {equipesTriees.map((equipe, index) => {
                       const diffButs = equipe.bp - equipe.bc;
-                      
+                      const estDansLesDeuxPremiers = index < 2;
+
+                      // Le numéro (#) devient vert si la poule est finie ET que l'équipe est 1ère ou 2ème
+                      const rankClassName = (pouleTerminee && estDansLesDeuxPremiers)
+                        ? `${styles.rank} ${styles.qualifiedRank}`
+                        : styles.rank;
+
                       return (
                         <tr key={equipe.pays} className={styles.tr}>
-                          <td className={styles.rank}>{index + 1}</td>
+                          <td className={rankClassName}>{index + 1}</td>
                           <td className={styles.teamCell}>
                             <div className={styles.teamInfo}>
                               <div className={styles.flagWrapper}>
@@ -88,7 +104,6 @@ export default function GroupesPage() {
                                 />
                               </div>
                               <div className={styles.nameWrapper}>
-                                {/* Utilisation des classes CSS pour l'alignement et le badge */}
                                 <div className={styles.nameRow}>
                                   <span className={styles.name}>{equipe.pays}</span>
                                   {equipe.gagnantTAB && (
@@ -121,19 +136,19 @@ export default function GroupesPage() {
         })}
 
         <div className={styles.legendContainer}>
-  <div className={styles.legendGrid}>
-    <div className={styles.legendItem}><strong>G</strong> Gagné (4 pts)</div>
-    <div className={styles.legendItem}><strong>N</strong> Nul (2 pts)</div>
-    <div className={styles.legendItem}><strong>P</strong> Perdu (1 pt)</div>
-    <div className={styles.legendItem}><strong>BP</strong> Buts Pour</div>
-    <div className={styles.legendItem}><strong>BC</strong> Buts Contre</div>
-    <div className={styles.legendItem}><strong>+/-</strong> Différence</div>
-    <div className={`${styles.legendItem} ${styles.legendFullRow}`}>
-      <span className={styles.badgeTabLegend}>GAGNANT TAB</span>
-      Équipe devant au classement grâce à sa victoire aux tirs au but (en cas d'égalité parfaite).
-    </div>
-  </div>
-</div>
+          <div className={styles.legendGrid}>
+            <div className={styles.legendItem}><strong>G</strong> Gagné (4 pts)</div>
+            <div className={styles.legendItem}><strong>N</strong> Nul (2 pts)</div>
+            <div className={styles.legendItem}><strong>P</strong> Perdu (1 pt)</div>
+            <div className={styles.legendItem}><strong>BP</strong> Buts Pour</div>
+            <div className={styles.legendItem}><strong>BC</strong> Buts Contre</div>
+            <div className={styles.legendItem}><strong>+/-</strong> Différence</div>
+            <div className={`${styles.legendItem} ${styles.legendFullRow}`}>
+              <span className={styles.badgeTabLegend}>GAGNANT TAB</span>
+              Équipe devant au classement grâce à sa victoire aux tirs au but (en cas d'égalité parfaite).
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
