@@ -717,6 +717,7 @@ font-weight: bold;
   display: flex;
   flex-direction: column;
   gap: 4px;
+  align-items: center; /* Centre la date au-dessus de la carte */
 }
 
 .matchCard {
@@ -725,21 +726,17 @@ font-weight: bold;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 10px;
   padding: 16px;
-  min-width: 220px;
+  min-width: 240px; /* Légèrement élargi pour un meilleur centrage interne */
   position: relative;
-  /* Ajout d'une transition plus douce et complète pour l'effet Hover */
-  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), 
-              box-shadow 0.3s ease, 
-              background-color 0.3s ease, 
-              border-color 0.3s ease;
+  /* Transition adoucie (sans le transform scale) */
+  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Effet interactif moderne au survol des cartes */
+/* Effet au survol : SANS ZOOM (scale retiré) */
 .matchCard:hover {
-  transform: translateY(-4px) scale(1.02);
   background-color: rgba(255, 255, 255, 0.08);
   border-color: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
   cursor: pointer;
 }
 
@@ -765,10 +762,12 @@ font-weight: bold;
   min-width: 280px;
   overflow: hidden;
   animation: finaleGlowPulse 2.5s ease-in-out infinite alternate;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
+/* Hover de la finale sans effet de zoom */
 .featured:hover {
-  transform: translateY(-5px) scale(1.03);
+  background: linear-gradient(135deg, rgba(34, 211, 238, 0.15) 0%, rgba(0, 0, 0, 0.4) 100%);
 }
 
 .specialCard {
@@ -809,51 +808,55 @@ font-weight: bold;
   font-size: 0.75rem;
   color: #22d3ee;
   font-weight: bold;
-  margin-left: 4px;
   text-transform: uppercase;
   opacity: 0.8;
+  text-align: center;
 }
 
 .matchDateYellow {
   font-size: 0.75rem;
   color: #eab308;
   font-weight: bold;
-  margin-left: 4px;
   text-transform: uppercase;
   opacity: 0.9;
+  text-align: center;
 }
 
 .matchDatePurple {
   font-size: 0.75rem;
   color: #a78bfa;
   font-weight: bold;
-  margin-left: 4px;
   text-transform: uppercase;
   opacity: 0.9;
+  text-align: center;
 }
 
-/* --- COMPOSANT TEAM BRACKET (Garde ses propres classes de structures) --- */
+/* --- ALIGNEMENT ET CENTRAGE DES ÉQUIPES --- */
 .teamRow {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 6px 0;
+  width: 100%;
 }
 
 .teamContainer {
   display: flex;
   align-items: center;
   gap: 10px;
+  flex: 1;
 }
 
 .teamContainerStaff {
-  padding-left: 8px;
+  padding-left: 0;
+  justify-content: flex-start;
 }
 
 .nameAndClass {
   display: flex;
   flex-direction: column;
   line-height: 1.2;
+  justify-content: center; /* Centre verticalement le nom et la classe */
 }
 
 .teamNameSmall {
@@ -892,8 +895,9 @@ font-weight: bold;
 .scoreSection {
   display: flex;
   align-items: center;
+  justify-content: flex-end; /* Aligne la section score vers la droite */
   gap: 8px;
-  margin-left: auto;
+  min-width: 65px; /* Assure un alignement parfait des scores entre les lignes */
 }
 
 .scoreCyan {
@@ -947,19 +951,18 @@ font-weight: bold;
   pointer-events: none;
 }
 
-/* Animation de lévitation fluide pour l'émoji Trophée */
+/* Animation de lévitation fine pour le Trophée */
 @keyframes floatTrophy {
   0% {
-    transform: translateY(0px) scale(1);
+    transform: translateY(0px);
     filter: drop-shadow(0 2px 4px rgba(234, 179, 8, 0.3));
   }
   50% {
-    transform: translateY(-5px) scale(1.1);
-    filter: drop-shadow(0 6px 12px rgba(234, 179, 8, 0.6));
+    transform: translateY(-4px);
+    filter: drop-shadow(0 6px 10px rgba(234, 179, 8, 0.5));
   }
   100% {
-    transform: translateY(0px) scale(1);
-    filter: drop-shadow(0 2px 4px rgba(234, 179, 8, 0.3));
+    transform: translateY(0px);
   }
 }
 
@@ -970,7 +973,6 @@ font-weight: bold;
   display: block;
   animation: floatTrophy 2.5s ease-in-out infinite;
 }
-
 /* ==========================================================================
    5. LÉGENDE
    ========================================================================== */

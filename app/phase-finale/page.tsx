@@ -111,7 +111,6 @@ export default function PhaseFinale() {
 
   // --- CALCUL DES QUALIFIÉS ET GAGNANTS ---
   const qWinner = quarts.map(m => getWinner(m));
-  
   const d1_t1 = demis[0]?.eq1 || qWinner[0] || "";
   const d1_t2 = demis[0]?.eq2 || qWinner[1] || "";
   const d2_t1 = demis[1]?.eq1 || qWinner[2] || "";
