@@ -72,7 +72,7 @@ export default function Page() {
             </div>
             <p className={styles.apercuRuleDescription}>Format "Tournante" spécial :</p>
             <ul className={styles.apercuRuleList}>
-              <li><strong>3 matchs</strong> de 5 minutes chacun.</li>
+              <li><strong>3 matchs</strong> de 10 minutes chacun.</li>
               <li>Victoire finale au plus grand nombre de points.</li>
             </ul>
           </div>
