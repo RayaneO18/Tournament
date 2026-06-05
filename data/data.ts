@@ -55,7 +55,7 @@ export const groupesBase: Groupe[] = [
   {
     nom: "Poule 2",
     equipes: [
-      { pays: "Etats-Unis", flag: "Etats-Unis.png", classe: "CE2C" },
+      { pays: "Etats-Unis", flag: "usa.png", classe: "CE2C" },
       { pays: "Panama", flag: "Panama.png", classe: "CM1B" },
       { pays: "Maroc", flag: "Maroc.png", classe: "ULIS" },
     ],

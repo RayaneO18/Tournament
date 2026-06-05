@@ -10,7 +10,7 @@ export const donneesEquipes = [
   { pays: "Argentine", flag: "Argentine.png", classe: "CE1B" },
   { pays: "Brésil", flag: "Bresil.png", classe: "CE2A" },
   { pays: "Nouvelle-Zélande", flag: "Nouvelle-zelande.png", classe: "CE2B" },
-  { pays: "Etats-Unis", flag: "Etats-Unis.png", classe: "CE2C" },
+  { pays: "Etats-Unis", flag: "usa.png", classe: "CE2C" },
   { pays: "Algérie", flag: "Algerie.png", classe: "CM1A" },
   { pays: "Panama", flag: "Panama.png", classe: "CM1B" },
   { pays: "Angleterre", flag: "Angleterre.png", classe: "CM2A" },
