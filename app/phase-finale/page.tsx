@@ -74,40 +74,38 @@ export default function PhaseFinale() {
     );
   };
 
- const TeamRow = ({ 
-    teamName, 
-    score, 
-    tab, 
-    isWinner, 
-    isBold
-  }: { 
-    teamName: string; 
-    score: number | null; 
-    tab?: number | null; // <-- Ajout de "| null" ici pour accepter tes données initiales
-    isWinner: boolean; 
-    isBold?: boolean;
-  }) => {
-    const showTab = score !== null && tab !== undefined && tab !== null;
+const TeamRow = ({ 
+  teamName, 
+  score, 
+  tab, 
+  isWinner, 
+  isBold
+}: { 
+  teamName: string; 
+  score: number | null; 
+  tab?: number | null; 
+  isWinner: boolean; 
+  isBold?: boolean;
+}) => {
+  const showTab = score !== null && tab !== undefined && tab !== null;
 
-    return (
-      <div className={styles.teamRow}>
-        <Team name={teamName} />
-        <div className={styles.scoreSection}>
-          
-          {/* Les tirs au but s'affichent toujours de la même manière, juste devant le score principal */}
-          {showTab && (
-            <span className={`${styles.scoreCyan} ${styles.scoreTab}`}>({tab})</span>
-          )}
+  return (
+    <div className={styles.teamRow}>
+      <Team name={teamName} />
+      <div className={styles.scoreSection}>
+        {showTab && (
+          <span className={`${styles.scoreCyan} ${styles.scoreTab}`}>({tab})</span>
+        )}
 
-          <span className={isBold ? styles.teamNameBold : styles.teamNameSmall}>
-            {score !== null ? score : "-"}
-          </span>
+        <span className={isBold ? styles.teamNameBold : styles.teamNameSmall}>
+          {score !== null ? score : "-"}
+        </span>
 
-          <div className={isWinner ? styles.dotCyan : styles.dot}></div>
-        </div>
+        <div className={isWinner ? styles.dotCyan : styles.dot}></div>
       </div>
-    );
-  };
+    </div>
+  );
+};
 
   // --- CALCUL DES QUALIFIÉS ET GAGNANTS ---
   const qWinner = quarts.map(m => getWinner(m));
