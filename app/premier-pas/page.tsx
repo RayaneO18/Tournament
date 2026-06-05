@@ -57,7 +57,10 @@ export default function CoupeCPPage() {
 
       <div className={styles.groupWrapper}>
         <div className={styles.tableContainer}>
-          <h2 className={styles.pouleHeader}>Classement</h2>
+<h2 className={styles.pouleHeader}>
+  <span>Classement</span>
+  <span className={styles.pouleDate}>18 Juin</span>
+</h2>
           <div className={styles.scrollContainer}>
             <table className={styles.table}>
               <thead>

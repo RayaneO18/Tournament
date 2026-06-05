@@ -540,6 +540,22 @@ font-weight: bold;
   font-size: 1.2rem;
   font-weight: 700;
   text-transform: uppercase;
+  
+  /* --- LES AJOUTS ICI --- */
+  display: flex;            /* Active le mode Flexbox */
+  justify-content: space-between; /* Pousse le texte à gauche et la date tout à droite */
+  align-items: center;      /* Centre verticalement la date avec le titre */
+}
+
+.pouleDate {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #00f0ff; 
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background: rgba(0, 240, 255, 0.1);
+  padding: 4px 10px;
+  border-radius: 4px;
 }
 
 .table {
