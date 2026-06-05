@@ -119,10 +119,10 @@ export const calendrierMatchs: Semaine[] = [
 // --- 3. DONNÉES DE LA PHASE FINALE (Même type 'Match') ---
 
 export const initialQuarts: Match[] = [
-  { eq1: "", score1: null, tab1: null, eq2: "", score2: null, tab2: null, poule: "Quart de finale", date: "8 Juin" },
-  { eq1: "", score1: null, tab1: null, eq2: "", score2: null, tab2: null, poule: "Quart de finale", date: "9 Juin" },
-  { eq1: "", score1: null, tab1: null, eq2: "", score2: null, tab2: null, poule: "Quart de finale", date: "11 Juin" },
-  { eq1: "", score1: null, tab1: null, eq2: "", score2: null, tab2: null, poule: "Quart de finale", date: "12 Juin" },
+  { eq1: "Angleterre", score1: null, tab1: null, eq2: "Panama", score2: null, tab2: null, poule: "Quart de finale", date: "8 Juin" },
+  { eq1: "Portugal", score1: null, tab1: null, eq2: "Espagne", score2: null, tab2: null, poule: "Quart de finale", date: "9 Juin" },
+  { eq1: "Etats-Unis", score1: null, tab1: null, eq2: "Allemagne", score2: null, tab2: null, poule: "Quart de finale", date: "11 Juin" },
+  { eq1: "France", score1: null, tab1: null, eq2: "Argentine", score2: null, tab2: null, poule: "Quart de finale", date: "12 Juin" },
 ];
 
 export const initialDemis: Match[] = [
