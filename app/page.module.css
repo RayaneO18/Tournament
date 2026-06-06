@@ -663,61 +663,294 @@ font-weight: bold;
 /* ==========================================================================
    4. PHASE FINALE (BRACKET)
    ========================================================================== */
+.container {
+  width: 100%;
+  min-height: 100vh;
+  color: #ffffff;
+  padding: 40px 20px;
+}
+
 .finalHeader {
   text-align: center;
   margin-bottom: 3rem;
 }
 
-/* Animation d'apparition fluide au chargement de la page */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(15px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.title {
+  text-align: center;
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  color: #22d3ee;
+  margin-bottom: 20px;
+  text-shadow: 0 0 10px rgba(34, 211, 238, 0.4);
 }
 
-.rowsWrapper {
+/* --- STRUCTURE DES TITRES ALIGNÉS --- */
+.bracketHeaders {
   display: flex;
-  flex-direction: column;
-  gap: 60px;
+  justify-content: space-between;
+  gap: 30px;
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px 80px 20px;
-  animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  max-width: 1300px;
+  margin: 0 auto 20px auto;
 }
 
-.stageRow {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 25px;
+.columnHeaderWrapper {
+  flex: 1;
+  min-width: 260px;
 }
 
 .rowLabel {
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   font-weight: 800;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.4);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  padding-bottom: 10px;
-  width: 100%;
   text-align: center;
+  padding-bottom: 12px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.05);
+  margin: 0;
 }
 
-.labelCyan {
-  color: #22d3ee;
-  border-color: rgba(34, 211, 238, 0.2);
+.labelCyan { color: #22d3ee; border-color: rgba(34, 211, 238, 0.15); }
+.labelPurple { color: #a78bfa; border-color: rgba(167, 139, 250, 0.15); }
+.labelYellow { color: #eab308; border-color: rgba(234, 179, 8, 0.15); }
+
+/* --- LE CONTENEUR DES MATCHS (SANS LES TITRES) --- */
+.bracketContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 30px;
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding-bottom: 60px;
 }
 
-.labelPurple {
-  color: #a78bfa;
-  border-bottom: 2px solid rgba(167, 139, 250, 0.3);
+.bracketColumn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 260px;
+}
+
+/* --- ALIGNEMENT PARFAIT GÉOMÉTRIQUE --- */
+/* Chaque emplacement de match virtuel fait la même hauteur qu'un Quart */
+.matchSlot {
+  height: 150px; /* Ajuste si tes cartes débordent, mais doit rester identique partout */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centre la carte horizontalement et verticalement */
+}
+
+/* Les demis prennent la hauteur de 2 slots de quarts cumulés (150px * 2) */
+.matchSlotDemi {
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Les finales prennent la hauteur totale des 4 slots de quarts (150px * 4) */
+.matchSlotFinale {
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* --- CARTES ET CONTENEURS --- */
+.matchWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+}
+
+.matchCard {
+  background: rgba(13, 20, 38, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 12px 14px;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  transition: all 0.25s ease;
+}
+
+.matchCard:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(18, 28, 54, 0.8);
+  cursor: pointer;
+}
+
+.cardDimmed {
+  border-style: dashed;
+  opacity: 0.75;
+}
+
+@keyframes finaleGlowPulse {
+  0% { border-color: rgba(234, 179, 8, 0.4); box-shadow: 0 0 15px rgba(234, 179, 8, 0.1); }
+  100% { border-color: #eab308; box-shadow: 0 0 25px rgba(234, 179, 8, 0.3); }
+}
+
+.featured {
+  border: 2px solid #eab308;
+  background: linear-gradient(135deg, rgba(234, 179, 8, 0.08) 0%, rgba(13, 20, 38, 0.95) 100%);
+  animation: finaleGlowPulse 2.5s ease-in-out infinite alternate;
+}
+
+.specialCard {
+  border: 1px solid rgba(167, 139, 250, 0.3);
+  background: rgba(20, 15, 35, 0.6);
+}
+
+.fairPlayCard {
+  border: 1px solid rgba(234, 179, 8, 0.3);
+  background: rgba(25, 22, 15, 0.6);
+}
+
+/* --- TEXTES ET DATES --- */
+.miniLabel, .miniLabelCyan, .miniLabelPurple, .miniLabelYellow {
+  font-size: 0.65rem;
+  font-weight: 900;
+  text-align: center;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+.miniLabel { color: rgba(255, 255, 255, 0.4); }
+.miniLabelCyan { color: #22d3ee; }
+.miniLabelPurple { color: #a78bfa; }
+.miniLabelYellow { color: #eab308; }
+
+.matchDateCyan, .matchDateYellow, .matchDatePurple {
+  font-size: 0.7rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
+  margin-bottom: 12px; /* Distanciation avec la bordure sous le titre */
+}
+.matchDateCyan { color: #22d3ee; }
+.matchDateYellow { color: #eab308; }
+.matchDatePurple { color: #a78bfa; }
+
+/* --- ÉQUIPES --- */
+.teamRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  width: 100%;
+}
+.teamRow:not(:last-child) {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.teamContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+}
+
+.flagWrapper {
+  width: 22px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.flagImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.nameAndClass {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.teamNameSmall {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+@keyframes pulseWaiting {
+  0% { opacity: 0.35; }
+  100% { opacity: 0.7; }
+}
+.teamNameWaiting {
+  font-style: italic;
+  animation: pulseWaiting 2s ease-in-out infinite alternate;
+}
+
+.teamNameStaff { font-weight: 500; color: #fff; }
+.teamNameBold { font-weight: 700; font-size: 0.95rem; color: #fff; }
+.groupBadge { opacity: 0.5; font-size: 0.65rem; }
+
+/* SCORES */
+.scoreSection {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  min-width: 65px;
+}
+.scoreCyan { color: #22d3ee; font-weight: bold; }
+.scoreTab { font-size: 0.75rem; }
+.vsDivider {
+  font-size: 0.55rem;
+  color: rgba(34, 211, 238, 0.4);
+  text-align: center;
+  margin: 2px 0;
+  font-weight: 900;
+}
+
+.dot { width: 6px; height: 6px; background: rgba(255, 255, 255, 0.15); border-radius: 50%; }
+.dotCyan {
+  width: 6px;
+  height: 6px;
+  background: #22d3ee;
+  border-radius: 50%;
+  animation: dotCyanPulse 1.5s ease-in-out infinite alternate;
+}
+@keyframes dotCyanPulse {
+  0% { transform: scale(1); box-shadow: 0 0 6px #22d3ee; }
+  100% { transform: scale(1.15); box-shadow: 0 0 14px #22d3ee; }
+}
+
+.finalGlow {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: radial-gradient(circle at center, rgba(234, 179, 8, 0.1), transparent);
+  pointer-events: none;
+}
+
+.trophyIcon {
+  text-align: center;
+  font-size: 1.3rem;
+  margin-top: 4px;
+  display: block;
+  animation: floatTrophy 2.5s ease-in-out infinite;
+}
+@keyframes floatTrophy {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-3px); }
+  100% { transform: translateY(0px); }
+}
+
+/* SECTIONS ANNEXES TRAINANTES CONTRE-BAS */
+.extraSectionWrapper {
+  width: 100%;
+  max-width: 1200px;
+  margin: 40px auto 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 }
 
 .matchGrid {
@@ -728,266 +961,34 @@ font-weight: bold;
   width: 100%;
 }
 
-/* --- CARTES ET CONTENEURS --- */
-.matchWrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  align-items: center; /* Centre la date au-dessus de la carte */
-}
-
-.matchCard {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  padding: 16px;
-  min-width: 240px; /* Légèrement élargi pour un meilleur centrage interne */
-  position: relative;
-  /* Transition adoucie (sans le transform scale) */
-  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-/* Effet au survol : SANS ZOOM (scale retiré) */
-.matchCard:hover {
-  background-color: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-  cursor: pointer;
-}
-
-.cardDimmed {
-  border-style: dashed;
-}
-
-/* Animation de pulsation néon sur-mesure pour la Grande Finale */
-@keyframes finaleGlowPulse {
-  0% {
-    border-color: #22d3ee;
-    box-shadow: 0 0 20px rgba(34, 211, 238, 0.15);
+/* --- COMPORTEMENT RESPONSIVE INJECTÉ --- */
+@media (max-width: 992px) {
+  /* On permet le défilement horizontal fluide de l'ensemble de l'arbre et de ses titres */
+  .bracketHeaders,
+  .bracketContainer {
+    display: flex;
+    flex-direction: row; /* Force l'alignement en ligne de l'arbre */
+    overflow-x: auto;    /* Active la barre de défilement horizontale */
+    scroll-behavior: smooth;
+    padding-bottom: 15px;
+    -webkit-overflow-scrolling: touch; /* Défilement fluide sur iOS */
   }
-  100% {
-    border-color: #06b6d4;
-    box-shadow: 0 0 35px rgba(34, 211, 238, 0.45);
+
+  /* Stylisation discrète de la barre de défilement horizontale pour mobile */
+  .bracketHeaders::-webkit-scrollbar,
+  .bracketContainer::-webkit-scrollbar {
+    height: 6px;
   }
-}
-
-.featured {
-  border: 2px solid #22d3ee;
-  background: linear-gradient(135deg, rgba(34, 211, 238, 0.1) 0%, rgba(0, 0, 0, 0.3) 100%);
-  min-width: 280px;
-  overflow: hidden;
-  animation: finaleGlowPulse 2.5s ease-in-out infinite alternate;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
-}
-
-/* Hover de la finale sans effet de zoom */
-.featured:hover {
-  background: linear-gradient(135deg, rgba(34, 211, 238, 0.15) 0%, rgba(0, 0, 0, 0.4) 100%);
-}
-
-.specialCard {
-  border: 1px solid rgba(167, 139, 250, 0.2);
-}
-
-.fairPlayCard {
-  border: 1px solid rgba(234, 179, 8, 0.4);
-}
-
-/* --- TEXTES, LABELS ET DATES --- */
-.miniLabel {
-  font-size: 0.6rem;
-  font-weight: 900;
-  text-align: center;
-  margin-bottom: 12px;
-  opacity: 0.5;
-}
-
-.miniLabelCyan {
-  font-size: 0.65rem;
-  font-weight: 900;
-  text-align: center;
-  margin-bottom: 12px;
-  color: #22d3ee;
-  letter-spacing: 1px;
-}
-
-.miniLabelPurple {
-  color: #a78bfa;
-}
-
-.miniLabelYellow {
-  color: #eab308;
-}
-
-.matchDateCyan {
-  font-size: 0.75rem;
-  color: #22d3ee;
-  font-weight: bold;
-  text-transform: uppercase;
-  opacity: 0.8;
-  text-align: center;
-}
-
-.matchDateYellow {
-  font-size: 0.75rem;
-  color: #eab308;
-  font-weight: bold;
-  text-transform: uppercase;
-  opacity: 0.9;
-  text-align: center;
-}
-
-.matchDatePurple {
-  font-size: 0.75rem;
-  color: #a78bfa;
-  font-weight: bold;
-  text-transform: uppercase;
-  opacity: 0.9;
-  text-align: center;
-}
-
-/* --- ALIGNEMENT ET CENTRAGE DES ÉQUIPES --- */
-.teamRow {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 6px 0;
-  width: 100%;
-}
-
-.teamContainer {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex: 1;
-}
-
-.teamContainerStaff {
-  padding-left: 0;
-  justify-content: flex-start;
-}
-
-.nameAndClass {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.2;
-  justify-content: center; /* Centre verticalement le nom et la classe */
-}
-
-.teamNameSmall {
-  font-size: 0.9rem;
-}
-
-/* Animation douce de respiration sur l'opacité des blocs en attente */
-@keyframes pulseWaiting {
-  0% { opacity: 0.35; }
-  100% { opacity: 0.7; }
-}
-
-.teamNameWaiting {
-  font-style: italic;
-  animation: pulseWaiting 2s ease-in-out infinite alternate;
-}
-
-.teamNameStaff {
-  font-weight: 500;
-}
-
-.teamNameBold {
-  font-weight: 700;
-  font-size: 1rem;
-}
-
-.groupBadge {
-  background: none;
-  border: none;
-  padding: 0;
-  opacity: 0.6;
-  font-size: 0.7rem;
-}
-
-/* --- SCORES ET STATUTS --- */
-.scoreSection {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end; /* Aligne la section score vers la droite */
-  gap: 8px;
-  min-width: 65px; /* Assure un alignement parfait des scores entre les lignes */
-}
-
-.scoreCyan {
-  color: #22d3ee;
-  font-weight: bold;
-}
-
-.scoreTab {
-  font-size: 0.8rem;
-}
-
-.vsDivider {
-  font-size: 0.6rem;
-  color: #22d3ee;
-  text-align: center;
-  margin: 8px 0;
-  font-weight: 900;
-}
-
-.dot {
-  width: 6px;
-  height: 6px;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
-}
-
-/* Effet de lueur LED animée sur le voyant du vainqueur */
-@keyframes dotCyanPulse {
-  0% {
-    transform: scale(1);
-    box-shadow: 0 0 6px #22d3ee;
+  .bracketHeaders::-webkit-scrollbar-thumb,
+  .bracketContainer::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
   }
-  100% {
-    transform: scale(1.15);
-    box-shadow: 0 0 14px #22d3ee, 0 0 4px #22d3ee;
-  }
-}
 
-.dotCyan {
-  width: 6px;
-  height: 6px;
-  background: #22d3ee;
-  border-radius: 50%;
-  animation: dotCyanPulse 1.5s ease-in-out infinite alternate;
-}
-
-.finalGlow {
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background: radial-gradient(circle at center, rgba(34, 211, 238, 0.15), transparent);
-  pointer-events: none;
-}
-
-/* Animation de lévitation fine pour le Trophée */
-@keyframes floatTrophy {
-  0% {
-    transform: translateY(0px);
-    filter: drop-shadow(0 2px 4px rgba(234, 179, 8, 0.3));
-  }
-  50% {
-    transform: translateY(-4px);
-    filter: drop-shadow(0 6px 10px rgba(234, 179, 8, 0.5));
-  }
-  100% {
-    transform: translateY(0px);
-  }
-}
-
-.trophyIcon {
-  text-align: center;
-  font-size: 1.6rem;
-  margin-top: 10px;
-  display: block;
-  animation: floatTrophy 2.5s ease-in-out infinite;
+  /* On préserve strictement l'architecture et les hauteurs d'alignement géométrique */
+  .matchSlot { height: 150px; }
+  .matchSlotDemi { height: 300px; }
+  .matchSlotFinale { height: 600px; }
 }
 /* ==========================================================================
    5. LÉGENDE

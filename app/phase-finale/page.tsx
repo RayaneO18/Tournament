@@ -35,7 +35,7 @@ export default function PhaseFinale() {
 
   if (!mounted) return null;
 
-  // --- COMPOSANTS DE RENDU INTERNES ---
+  // --- RENDU ÉQUIPE ---
   const Team = ({ name }: { name: string }) => {
     const info = trouverEquipe(name);
     
@@ -74,40 +74,39 @@ export default function PhaseFinale() {
     );
   };
 
-const TeamRow = ({ 
-  teamName, 
-  score, 
-  tab, 
-  isWinner, 
-  isBold
-}: { 
-  teamName: string; 
-  score: number | null; 
-  tab?: number | null; 
-  isWinner: boolean; 
-  isBold?: boolean;
-}) => {
-  const showTab = score !== null && tab !== undefined && tab !== null;
+  // --- RENDU LIGNE SCORE ---
+  const TeamRow = ({ 
+    teamName, 
+    score, 
+    tab, 
+    isWinner, 
+    isBold
+  }: { 
+    teamName: string; 
+    score: number | null; 
+    tab?: number | null; 
+    isWinner: boolean; 
+    isBold?: boolean;
+  }) => {
+    const showTab = score !== null && tab !== undefined && tab !== null;
 
-  return (
-    <div className={styles.teamRow}>
-      <Team name={teamName} />
-      <div className={styles.scoreSection}>
-        {showTab && (
-          <span className={`${styles.scoreCyan} ${styles.scoreTab}`}>({tab})</span>
-        )}
-
-        <span className={isBold ? styles.teamNameBold : styles.teamNameSmall}>
-          {score !== null ? score : "-"}
-        </span>
-
-        <div className={isWinner ? styles.dotCyan : styles.dot}></div>
+    return (
+      <div className={styles.teamRow}>
+        <Team name={teamName} />
+        <div className={styles.scoreSection}>
+          {showTab && (
+            <span className={`${styles.scoreCyan} ${styles.scoreTab}`}>({tab})</span>
+          )}
+          <span className={isBold ? styles.teamNameBold : styles.teamNameSmall}>
+            {score !== null ? score : "-"}
+          </span>
+          <div className={isWinner ? styles.dotCyan : styles.dot}></div>
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  };
 
-  // --- CALCUL DES QUALIFIÉS ET GAGNANTS ---
+  // --- LOGIQUE BRACKET ---
   const qWinner = quarts.map(m => getWinner(m));
   const d1_t1 = demis[0]?.eq1 || qWinner[0] || "";
   const d1_t2 = demis[0]?.eq2 || qWinner[1] || "";
@@ -128,151 +127,141 @@ const TeamRow = ({
   const pf_t2 = petiteFinale.eq2 || dLoser[1] || "";
   const currentPetiteFinal = { ...petiteFinale, eq1: pf_t1, eq2: pf_t2 };
 
-  // Filtrer la Coupe du Fair-Play pour ne pas l'afficher en double en bas
   const fairPlayMatch = matchsSpeciaux.find(m => m.label === "COUPE DU FAIR-PLAY");
   const autresMatchsSpeciaux = matchsSpeciaux.filter(m => m.label !== "COUPE DU FAIR-PLAY");
-return (
-  <div className={styles.container}>
-    <header className={styles.finalHeader}>
-      <h1 className={styles.title}>PHASE FINALE</h1>
-    </header>
 
-    <div className={styles.rowsWrapper}>
-      
-      {/* QUARTS */}
-      <section className={styles.stageRow}>
-        <h2 className={styles.rowLabel}>Quarts de finale</h2>
-        <div className={styles.matchGrid}>
+  return (
+    <div className={styles.container}>
+      <header className={styles.finalHeader}>
+        <h1 className={styles.title}>PHASE FINALE</h1>
+      </header>
+
+      {/* 1. LIGNE DES TITRES ALIGNÉS EN HAUT */}
+      <div className={styles.bracketHeaders}>
+        <div className={styles.columnHeaderWrapper}>
+          <h2 className={`${styles.rowLabel} ${styles.labelCyan}`}>Quarts de finale</h2>
+        </div>
+        <div className={styles.columnHeaderWrapper}>
+          <h2 className={`${styles.rowLabel} ${styles.labelPurple}`}>Demi-finales</h2>
+        </div>
+        <div className={styles.columnHeaderWrapper}>
+          <h2 className={`${styles.rowLabel} ${styles.labelYellow}`}>Finales</h2>
+        </div>
+      </div>
+
+      {/* 2. L'ARBRE (BRACKET CHRONOLOGIQUE ET GÉOMÉTRIQUE) */}
+      <div className={styles.bracketContainer}>
+        
+        {/* COLONNE 1 : QUARTS */}
+        <div className={styles.bracketColumn}>
           {quarts.map((m, i) => (
-            <div key={i} className={styles.matchWrapper}>
-              {m.date && (
-                <span className={styles.matchDateCyan}>
-                  {m.date}
-                </span>
-              )}
-              <div className={styles.matchCard}>
-                <TeamRow teamName={m.eq1} score={m.score1} tab={m.tab1} isWinner={getWinner(m) === m.eq1} />
-                <TeamRow teamName={m.eq2} score={m.score2} tab={m.tab2} isWinner={getWinner(m) === m.eq2} />
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* DEMIS */}
-      <section className={styles.stageRow}>
-        <h2 className={styles.rowLabel}>Demi-finales</h2>
-        <div className={styles.matchGrid}>
-          {demis.map((m, i) => (
-            <div key={i} className={styles.matchWrapper}>
-              {m.date && (
-                <span className={styles.matchDateCyan}>
-                  {m.date}
-                </span>
-              )}
-              <div className={styles.matchCard}>
-                {i === 0 ? (
-                  <>
-                    <TeamRow teamName={d1_t1} score={demis[0].score1} tab={demis[0].tab1} isWinner={getWinner(currentDemi1) === d1_t1} />
-                    <TeamRow teamName={d1_t2} score={demis[0].score2} tab={demis[0].tab2} isWinner={getWinner(currentDemi1) === d1_t2} />
-                  </>
-                ) : (
-                  <>
-                    <TeamRow teamName={d2_t1} score={demis[1].score1} tab={demis[1].tab1} isWinner={getWinner(currentDemi2) === d2_t1} />
-                    <TeamRow teamName={d2_t2} score={demis[1].score2} tab={demis[1].tab2} isWinner={getWinner(currentDemi2) === d2_t2} />
-                  </>
-                )}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* CLASSEMENT & FINALE */}
-      <section className={styles.stageRow}>
-        <h2 className={`${styles.rowLabel} ${styles.labelCyan}`}>Matchs pour les Titres</h2>
-        <div className={styles.matchGrid}>
-          
-          {/* COUPE DU FAIR-PLAY */}
-          {fairPlayMatch && (
-            <div className={styles.matchWrapper}>
-              {fairPlayMatch.date && (
-                <span className={styles.matchDateYellow}>
-                  {fairPlayMatch.date}
-                </span>
-              )}
-              <div className={`${styles.matchCard} ${styles.fairPlayCard}`}>
-                <div className={`${styles.miniLabel} ${styles.miniLabelYellow}`}>
-                  {fairPlayMatch.label}
-                </div>
-                <TeamRow teamName={fairPlayMatch.eq1} score={fairPlayMatch.score1} tab={fairPlayMatch.tab1} isWinner={getWinner(fairPlayMatch) === fairPlayMatch.eq1} />
-                <TeamRow teamName={fairPlayMatch.eq2} score={fairPlayMatch.score2} tab={fairPlayMatch.tab2} isWinner={getWinner(fairPlayMatch) === fairPlayMatch.eq2} />
-              </div>
-            </div>
-          )}
-
-          {/* 3ÈME PLACE */}
-          <div className={styles.matchWrapper}>
-            {petiteFinale.date && (
-              <span className={styles.matchDateCyan}>
-                {petiteFinale.date}
-              </span>
-            )}
-            <div className={`${styles.matchCard} ${styles.cardDimmed}`}>
-              <div className={styles.miniLabel}>3ÈME PLACE</div>
-              <TeamRow teamName={pf_t1} score={petiteFinale.score1} tab={petiteFinale.tab1} isWinner={getWinner(currentPetiteFinal) === pf_t1} />
-              <TeamRow teamName={pf_t2} score={petiteFinale.score2} tab={petiteFinale.tab2} isWinner={getWinner(currentPetiteFinal) === pf_t2} />
-            </div>
-          </div>
-
-          {/* GRANDE FINALE */}
-          <div className={styles.matchWrapper}>
-            {finale.date && (
-              <span className={styles.matchDateYellow}>
-                {finale.date}
-              </span>
-            )}
-            <div className={`${styles.matchCard} ${styles.featured}`}>
-              <div className={styles.finalGlow}></div>
-              <div className={styles.miniLabelCyan}>GRANDE FINALE</div>
-              <TeamRow teamName={f_t1} score={finale.score1} tab={finale.tab1} isWinner={getWinner(currentFinal) === f_t1} isBold />
-              <div className={styles.vsDivider}>VS</div>
-              <TeamRow teamName={f_t2} score={finale.score2} tab={finale.tab2} isWinner={getWinner(currentFinal) === f_t2} isBold />
-              <div className={styles.trophyIcon}>🏆</div>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      {/* SECTION POUR LES AUTRES MATCHS SPÉCIAUX */}
-      {autresMatchsSpeciaux.length > 0 && (
-        <section className={styles.stageRow}>
-          <h2 className={`${styles.rowLabel} ${styles.labelPurple}`}>
-            Matchs Événements
-          </h2>
-          <div className={styles.matchGrid}>
-            {autresMatchsSpeciaux.map((m, i) => (
-              <div key={i} className={styles.matchWrapper}>
-                {m.date && (
-                  <span className={styles.matchDatePurple}>
-                    {m.date}
-                  </span>
-                )}
-                <div className={`${styles.matchCard} ${styles.specialCard}`}>
-                  <div className={`${styles.miniLabel} ${styles.miniLabelPurple}`}>
-                    {m.label}
-                  </div>
+            <div key={i} className={styles.matchSlot}>
+              <div className={styles.matchWrapper}>
+                {m.date && <span className={styles.matchDateCyan}>{m.date}</span>}
+                <div className={styles.matchCard}>
                   <TeamRow teamName={m.eq1} score={m.score1} tab={m.tab1} isWinner={getWinner(m) === m.eq1} />
                   <TeamRow teamName={m.eq2} score={m.score2} tab={m.tab2} isWinner={getWinner(m) === m.eq2} />
                 </div>
               </div>
-            ))}
-          </div>
-        </section>
-      )}
+            </div>
+          ))}
+        </div>
 
+        {/* COLONNE 2 : DEMIS (ALIGNÉES GÉOMÉTRIQUEMENT) */}
+        <div className={styles.bracketColumn}>
+          {/* Demi 1 (englobe les deux premiers quarts) */}
+          <div className={styles.matchSlotDemi}>
+            <div className={styles.matchWrapper}>
+              {demis[0]?.date && <span className={styles.matchDatePurple}>{demis[0].date}</span>}
+              <div className={styles.matchCard}>
+                <TeamRow teamName={d1_t1} score={demis[0]?.score1 ?? null} tab={demis[0]?.tab1} isWinner={getWinner(currentDemi1) === d1_t1} />
+                <TeamRow teamName={d1_t2} score={demis[0]?.score2 ?? null} tab={demis[0]?.tab2} isWinner={getWinner(currentDemi1) === d1_t2} />
+              </div>
+            </div>
+          </div>
+
+          {/* Demi 2 (englobe les deux derniers quarts) */}
+          <div className={styles.matchSlotDemi}>
+            <div className={styles.matchWrapper}>
+              {demis[1]?.date && <span className={styles.matchDatePurple}>{demis[1].date}</span>}
+              <div className={styles.matchCard}>
+                <TeamRow teamName={d2_t1} score={demis[1]?.score1 ?? null} tab={demis[1]?.tab1} isWinner={getWinner(currentDemi2) === d2_t1} />
+                <TeamRow teamName={d2_t2} score={demis[1]?.score2 ?? null} tab={demis[1]?.tab2} isWinner={getWinner(currentDemi2) === d2_t2} />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* COLONNE 3 : FINALE ET 3ÈME PLACE ACCUMULÉES */}
+        <div className={styles.bracketColumn}>
+          <div className={styles.matchSlotFinale}>
+            
+            {/* GRANDE FINALE (Haut du tableau) */}
+            <div className={styles.matchWrapper} style={{ marginBottom: "40px" }}>
+              {finale.date && <span className={styles.matchDateYellow}>{finale.date}</span>}
+              <div className={`${styles.matchCard} ${styles.featured}`}>
+                <div className={styles.finalGlow}></div>
+                <div className={styles.miniLabelCyan}>GRANDE FINALE</div>
+                <TeamRow teamName={f_t1} score={finale.score1} tab={finale.tab1} isWinner={getWinner(currentFinal) === f_t1} isBold />
+                <div className={styles.vsDivider}>VS</div>
+                <TeamRow teamName={f_t2} score={finale.score2} tab={finale.tab2} isWinner={getWinner(currentFinal) === f_t2} isBold />
+                <div className={styles.trophyIcon}>🏆</div>
+              </div>
+            </div>
+
+            {/* 3ÈME PLACE (Bas du tableau) */}
+            <div className={styles.matchWrapper}>
+              {petiteFinale.date && <span className={styles.matchDateCyan}>{petiteFinale.date}</span>}
+              <div className={`${styles.matchCard} ${styles.cardDimmed}`}>
+                <div className={styles.miniLabel}>3ÈME PLACE</div>
+                <TeamRow teamName={pf_t1} score={petiteFinale.score1} tab={petiteFinale.tab1} isWinner={getWinner(currentPetiteFinal) === pf_t1} />
+                <div className={styles.vsDivider}>VS</div>
+                <TeamRow teamName={pf_t2} score={petiteFinale.score2} tab={petiteFinale.tab2} isWinner={getWinner(currentPetiteFinal) === pf_t2} />
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <div className={styles.extraSectionWrapper}>
+        {fairPlayMatch && (
+          <section className={styles.stageRow}>
+            <h2 className={`${styles.rowLabel} ${styles.labelYellow}`}>Récompense Spéciale</h2>
+            <div className={styles.matchGrid}>
+              <div className={styles.matchWrapper} style={{ width: "280px" }}>
+                  <br></br>
+                {fairPlayMatch.date && <span className={styles.matchDateYellow}>{fairPlayMatch.date}</span>}
+                <div className={`${styles.matchCard} ${styles.fairPlayCard}`}>
+                  <div className={`${styles.miniLabel} ${styles.miniLabelYellow}`}>{fairPlayMatch.label}</div>
+                  <TeamRow teamName={fairPlayMatch.eq1} score={fairPlayMatch.score1} tab={fairPlayMatch.tab1} isWinner={getWinner(fairPlayMatch) === fairPlayMatch.eq1} />
+                  <TeamRow teamName={fairPlayMatch.eq2} score={fairPlayMatch.score2} tab={fairPlayMatch.tab2} isWinner={getWinner(fairPlayMatch) === fairPlayMatch.eq2} />
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {autresMatchsSpeciaux.length > 0 && (
+          <section className={styles.stageRow}>
+            <h2 className={`${styles.rowLabel} ${styles.labelPurple}`}>Matchs Événements</h2>
+            <div className={styles.matchGrid}>
+              {autresMatchsSpeciaux.map((m, i) => (
+                <div key={i} className={styles.matchWrapper} style={{ width: "260px" }}>
+                  <br></br>
+                  {m.date && <span className={styles.matchDatePurple}>{m.date}</span>}
+                  <div className={`${styles.matchCard} ${styles.specialCard}`}>
+                    <div className={`${styles.miniLabel} ${styles.miniLabelPurple}`}>{m.label}</div>
+                    <TeamRow teamName={m.eq1} score={m.score1} tab={m.tab1} isWinner={getWinner(m) === m.eq1} />
+                    <TeamRow teamName={m.eq2} score={m.score2} tab={m.tab2} isWinner={getWinner(m) === m.eq2} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+      </div>
     </div>
-  </div>
-);
+  );
 }
