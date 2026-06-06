@@ -136,102 +136,107 @@ export default function PhaseFinale() {
         <h1 className={styles.title}>PHASE FINALE</h1>
       </header>
 
-      {/* 1. LIGNE DES TITRES ALIGNÉS EN HAUT */}
-      <div className={styles.bracketHeaders}>
-        <div className={styles.columnHeaderWrapper}>
-          <h2 className={`${styles.rowLabel} ${styles.labelCyan}`}>Quarts de finale</h2>
-        </div>
-        <div className={styles.columnHeaderWrapper}>
-          <h2 className={`${styles.rowLabel} ${styles.labelPurple}`}>Demi-finales</h2>
-        </div>
-        <div className={styles.columnHeaderWrapper}>
-          <h2 className={`${styles.rowLabel} ${styles.labelYellow}`}>Finales</h2>
-        </div>
-      </div>
-
-      {/* 2. L'ARBRE (BRACKET CHRONOLOGIQUE ET GÉOMÉTRIQUE) */}
-      <div className={styles.bracketContainer}>
+      {/* ENVELOPPE DE SCROLL UNIQUE POUR SYNCHRONISER LES TITRES ET LES MATCHS */}
+      <div className={styles.bracketWrapperScroll}>
         
-        {/* COLONNE 1 : QUARTS */}
-        <div className={styles.bracketColumn}>
-          {quarts.map((m, i) => (
-            <div key={i} className={styles.matchSlot}>
+        {/* 1. LIGNE DES TITRES ALIGNÉS EN HAUT */}
+        <div className={styles.bracketHeaders}>
+          <div className={styles.columnHeaderWrapper}>
+            <h2 className={`${styles.rowLabel} ${styles.labelCyan}`}>Quarts de finale</h2>
+          </div>
+          <div className={styles.columnHeaderWrapper}>
+            <h2 className={`${styles.rowLabel} ${styles.labelPurple}`}>Demi-finales</h2>
+          </div>
+          <div className={styles.columnHeaderWrapper}>
+            <h2 className={`${styles.rowLabel} ${styles.labelYellow}`}>Finales</h2>
+          </div>
+        </div>
+
+        {/* 2. L'ARBRE (BRACKET CHRONOLOGIQUE ET GÉOMÉTRIQUE) */}
+        <div className={styles.bracketContainer}>
+          
+          {/* COLONNE 1 : QUARTS */}
+          <div className={styles.bracketColumn}>
+            {quarts.map((m, i) => (
+              <div key={i} className={styles.matchSlot}>
+                <div className={styles.matchWrapper}>
+                  {m.date && <span className={styles.matchDateCyan}>{m.date}</span>}
+                  <div className={styles.matchCard}>
+                    <TeamRow teamName={m.eq1} score={m.score1} tab={m.tab1} isWinner={getWinner(m) === m.eq1} />
+                    <TeamRow teamName={m.eq2} score={m.score2} tab={m.tab2} isWinner={getWinner(m) === m.eq2} />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* COLONNE 2 : DEMIS */}
+          <div className={styles.bracketColumn}>
+            {/* Demi 1 */}
+            <div className={styles.matchSlotDemi}>
               <div className={styles.matchWrapper}>
-                {m.date && <span className={styles.matchDateCyan}>{m.date}</span>}
+                {demis[0]?.date && <span className={styles.matchDatePurple}>{demis[0].date}</span>}
                 <div className={styles.matchCard}>
-                  <TeamRow teamName={m.eq1} score={m.score1} tab={m.tab1} isWinner={getWinner(m) === m.eq1} />
-                  <TeamRow teamName={m.eq2} score={m.score2} tab={m.tab2} isWinner={getWinner(m) === m.eq2} />
+                  <TeamRow teamName={d1_t1} score={demis[0]?.score1 ?? null} tab={demis[0]?.tab1} isWinner={getWinner(currentDemi1) === d1_t1} />
+                  <TeamRow teamName={d1_t2} score={demis[0]?.score2 ?? null} tab={demis[0]?.tab2} isWinner={getWinner(currentDemi1) === d1_t2} />
                 </div>
               </div>
             </div>
-          ))}
-        </div>
 
-        {/* COLONNE 2 : DEMIS (ALIGNÉES GÉOMÉTRIQUEMENT) */}
-        <div className={styles.bracketColumn}>
-          {/* Demi 1 (englobe les deux premiers quarts) */}
-          <div className={styles.matchSlotDemi}>
-            <div className={styles.matchWrapper}>
-              {demis[0]?.date && <span className={styles.matchDatePurple}>{demis[0].date}</span>}
-              <div className={styles.matchCard}>
-                <TeamRow teamName={d1_t1} score={demis[0]?.score1 ?? null} tab={demis[0]?.tab1} isWinner={getWinner(currentDemi1) === d1_t1} />
-                <TeamRow teamName={d1_t2} score={demis[0]?.score2 ?? null} tab={demis[0]?.tab2} isWinner={getWinner(currentDemi1) === d1_t2} />
+            {/* Demi 2 */}
+            <div className={styles.matchSlotDemi}>
+              <div className={styles.matchWrapper}>
+                {demis[1]?.date && <span className={styles.matchDatePurple}>{demis[1].date}</span>}
+                <div className={styles.matchCard}>
+                  <TeamRow teamName={d2_t1} score={demis[1]?.score1 ?? null} tab={demis[1]?.tab1} isWinner={getWinner(currentDemi2) === d2_t1} />
+                  <TeamRow teamName={d2_t2} score={demis[1]?.score2 ?? null} tab={demis[1]?.tab2} isWinner={getWinner(currentDemi2) === d2_t2} />
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Demi 2 (englobe les deux derniers quarts) */}
-          <div className={styles.matchSlotDemi}>
-            <div className={styles.matchWrapper}>
-              {demis[1]?.date && <span className={styles.matchDatePurple}>{demis[1].date}</span>}
-              <div className={styles.matchCard}>
-                <TeamRow teamName={d2_t1} score={demis[1]?.score1 ?? null} tab={demis[1]?.tab1} isWinner={getWinner(currentDemi2) === d2_t1} />
-                <TeamRow teamName={d2_t2} score={demis[1]?.score2 ?? null} tab={demis[1]?.tab2} isWinner={getWinner(currentDemi2) === d2_t2} />
+          {/* COLONNE 3 : FINALE ET 3ÈME PLACE */}
+          <div className={styles.bracketColumn}>
+            <div className={styles.matchSlotFinale}>
+              
+              {/* GRANDE FINALE */}
+              <div className={styles.matchWrapper} style={{ marginBottom: "40px" }}>
+                {finale.date && <span className={styles.matchDateYellow}>{finale.date}</span>}
+                <div className={`${styles.matchCard} ${styles.featured}`}>
+                  <div className={styles.finalGlow}></div>
+                  <div className={styles.miniLabelCyan}>GRANDE FINALE</div>
+                  <TeamRow teamName={f_t1} score={finale.score1} tab={finale.tab1} isWinner={getWinner(currentFinal) === f_t1} isBold />
+                  <div className={styles.vsDivider}>VS</div>
+                  <TeamRow teamName={f_t2} score={finale.score2} tab={finale.tab2} isWinner={getWinner(currentFinal) === f_t2} isBold />
+                  <div className={styles.trophyIcon}>🏆</div>
+                </div>
               </div>
+
+              {/* 3ÈME PLACE */}
+              <div className={styles.matchWrapper}>
+                {petiteFinale.date && <span className={styles.matchDateCyan}>{petiteFinale.date}</span>}
+                <div className={`${styles.matchCard} ${styles.cardDimmed}`}>
+                  <div className={styles.miniLabel}>3ÈME PLACE</div>
+                  <TeamRow teamName={pf_t1} score={petiteFinale.score1} tab={petiteFinale.tab1} isWinner={getWinner(currentPetiteFinal) === pf_t1} />
+                  <div className={styles.vsDivider}>VS</div>
+                  <TeamRow teamName={pf_t2} score={petiteFinale.score2} tab={petiteFinale.tab2} isWinner={getWinner(currentPetiteFinal) === pf_t2} />
+                </div>
+              </div>
+
             </div>
           </div>
+
         </div>
-
-        {/* COLONNE 3 : FINALE ET 3ÈME PLACE ACCUMULÉES */}
-        <div className={styles.bracketColumn}>
-          <div className={styles.matchSlotFinale}>
-            
-            {/* GRANDE FINALE (Haut du tableau) */}
-            <div className={styles.matchWrapper} style={{ marginBottom: "40px" }}>
-              {finale.date && <span className={styles.matchDateYellow}>{finale.date}</span>}
-              <div className={`${styles.matchCard} ${styles.featured}`}>
-                <div className={styles.finalGlow}></div>
-                <div className={styles.miniLabelCyan}>GRANDE FINALE</div>
-                <TeamRow teamName={f_t1} score={finale.score1} tab={finale.tab1} isWinner={getWinner(currentFinal) === f_t1} isBold />
-                <div className={styles.vsDivider}>VS</div>
-                <TeamRow teamName={f_t2} score={finale.score2} tab={finale.tab2} isWinner={getWinner(currentFinal) === f_t2} isBold />
-                <div className={styles.trophyIcon}>🏆</div>
-              </div>
-            </div>
-
-            {/* 3ÈME PLACE (Bas du tableau) */}
-            <div className={styles.matchWrapper}>
-              {petiteFinale.date && <span className={styles.matchDateCyan}>{petiteFinale.date}</span>}
-              <div className={`${styles.matchCard} ${styles.cardDimmed}`}>
-                <div className={styles.miniLabel}>3ÈME PLACE</div>
-                <TeamRow teamName={pf_t1} score={petiteFinale.score1} tab={petiteFinale.tab1} isWinner={getWinner(currentPetiteFinal) === pf_t1} />
-                <div className={styles.vsDivider}>VS</div>
-                <TeamRow teamName={pf_t2} score={petiteFinale.score2} tab={petiteFinale.tab2} isWinner={getWinner(currentPetiteFinal) === pf_t2} />
-              </div>
-            </div>
-
-          </div>
-        </div>
-
       </div>
 
+      {/* SECTIONS ANNEXES TRAINANTES EN BAS (RESTENT EN COMPORTEMENT NORMAL) */}
       <div className={styles.extraSectionWrapper}>
         {fairPlayMatch && (
           <section className={styles.stageRow}>
             <h2 className={`${styles.rowLabel} ${styles.labelYellow}`}>Récompense Spéciale</h2>
             <div className={styles.matchGrid}>
               <div className={styles.matchWrapper} style={{ width: "280px" }}>
-                  <br></br>
+                <br></br>
                 {fairPlayMatch.date && <span className={styles.matchDateYellow}>{fairPlayMatch.date}</span>}
                 <div className={`${styles.matchCard} ${styles.fairPlayCard}`}>
                   <div className={`${styles.miniLabel} ${styles.miniLabelYellow}`}>{fairPlayMatch.label}</div>

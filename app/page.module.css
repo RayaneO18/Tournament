@@ -684,14 +684,20 @@ font-weight: bold;
   text-shadow: 0 0 10px rgba(34, 211, 238, 0.4);
 }
 
+/* --- NOUVEAU CONTENEUR ENVELOPPANT POUR LE SCROLL DOUBLE --- */
+.bracketWrapperScroll {
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
 /* --- STRUCTURE DES TITRES ALIGNÉS --- */
 .bracketHeaders {
   display: flex;
   justify-content: space-between;
   gap: 30px;
   width: 100%;
-  max-width: 1300px;
-  margin: 0 auto 20px auto;
+  margin-bottom: 20px;
 }
 
 .columnHeaderWrapper {
@@ -714,15 +720,13 @@ font-weight: bold;
 .labelPurple { color: #a78bfa; border-color: rgba(167, 139, 250, 0.15); }
 .labelYellow { color: #eab308; border-color: rgba(234, 179, 8, 0.15); }
 
-/* --- LE CONTENEUR DES MATCHS (SANS LES TITRES) --- */
+/* --- LE CONTENEUR DES MATCHS --- */
 .bracketContainer {
   display: flex;
   justify-content: space-between;
   align-items: stretch;
   gap: 30px;
   width: 100%;
-  max-width: 1300px;
-  margin: 0 auto;
   padding-bottom: 60px;
 }
 
@@ -734,15 +738,13 @@ font-weight: bold;
 }
 
 /* --- ALIGNEMENT PARFAIT GÉOMÉTRIQUE --- */
-/* Chaque emplacement de match virtuel fait la même hauteur qu'un Quart */
 .matchSlot {
-  height: 150px; /* Ajuste si tes cartes débordent, mais doit rester identique partout */
+  height: 150px; 
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Centre la carte horizontalement et verticalement */
+  justify-content: center; 
 }
 
-/* Les demis prennent la hauteur de 2 slots de quarts cumulés (150px * 2) */
 .matchSlotDemi {
   height: 300px;
   display: flex;
@@ -750,7 +752,6 @@ font-weight: bold;
   justify-content: center;
 }
 
-/* Les finales prennent la hauteur totale des 4 slots de quarts (150px * 4) */
 .matchSlotFinale {
   height: 600px;
   display: flex;
@@ -828,7 +829,7 @@ font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 1px;
   text-align: center;
-  margin-bottom: 12px; /* Distanciation avec la bordure sous le titre */
+  margin-bottom: 12px;
 }
 .matchDateCyan { color: #22d3ee; }
 .matchDateYellow { color: #eab308; }
@@ -961,31 +962,36 @@ font-weight: bold;
   width: 100%;
 }
 
-/* --- COMPORTEMENT RESPONSIVE INJECTÉ --- */
+/* --- COMPORTEMENT RESPONSIVE UNIQUE POUR LE BLOC COMPLET --- */
 @media (max-width: 992px) {
-  /* On permet le défilement horizontal fluide de l'ensemble de l'arbre et de ses titres */
-  .bracketHeaders,
-  .bracketContainer {
-    display: flex;
-    flex-direction: row; /* Force l'alignement en ligne de l'arbre */
-    overflow-x: auto;    /* Active la barre de défilement horizontale */
+  /* On déplace la gestion du scroll horizontal sur le parent commun uniquement */
+  .bracketWrapperScroll {
+    display: block;
+    overflow-x: auto;
     scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
     padding-bottom: 15px;
-    -webkit-overflow-scrolling: touch; /* Défilement fluide sur iOS */
   }
 
-  /* Stylisation discrète de la barre de défilement horizontale pour mobile */
-  .bracketHeaders::-webkit-scrollbar,
-  .bracketContainer::-webkit-scrollbar {
+  /* On s'assure que les titres et matchs restent bien alignés sur une seule et même ligne infinie */
+  .bracketHeaders,
+  .bracketContainer {
+    display: inline-flex; /* Force les colonnes à garder leur largeur sans se tasser */
+    flex-direction: row;
+    width: max-content;   /* Permet au contenu de s'étendre horizontalement */
+    overflow: visible;    /* Désactive le scroll individuel qui cassait la synchro */
+  }
+
+  /* Stylisation de la barre de défilement unique pour le bloc complet */
+  .bracketWrapperScroll::-webkit-scrollbar {
     height: 6px;
   }
-  .bracketHeaders::-webkit-scrollbar-thumb,
-  .bracketContainer::-webkit-scrollbar-thumb {
+  .bracketWrapperScroll::-webkit-scrollbar-thumb {
     background-color: rgba(255, 255, 255, 0.15);
     border-radius: 10px;
   }
 
-  /* On préserve strictement l'architecture et les hauteurs d'alignement géométrique */
+  /* Maintien strict de l'architecture géométrique */
   .matchSlot { height: 150px; }
   .matchSlotDemi { height: 300px; }
   .matchSlotFinale { height: 600px; }
