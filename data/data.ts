@@ -121,7 +121,7 @@ export const calendrierMatchs: Semaine[] = [
 export const initialQuarts: Match[] = [
   { eq1: "Angleterre", score1: 0, tab1: 0, eq2: "Panama", score2: 0, tab2: 1, poule: "Quart de finale", date: "8 Juin" },
   { eq1: "Portugal", score1: 2, tab1: null, eq2: "Espagne", score2: 0, tab2: null, poule: "Quart de finale", date: "9 Juin" },
-  { eq1: "Etats-Unis", score1: null, tab1: null, eq2: "Allemagne", score2: null, tab2: null, poule: "Quart de finale", date: "11 Juin" },
+  { eq1: "Etats-Unis", score1: 8, tab1: null, eq2: "Allemagne", score2: 2, tab2: null, poule: "Quart de finale", date: "11 Juin" },
   { eq1: "France", score1: null, tab1: null, eq2: "Argentine", score2: null, tab2: null, poule: "Quart de finale", date: "12 Juin" },
 ];
 
