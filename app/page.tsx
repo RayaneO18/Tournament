@@ -24,6 +24,23 @@ export default function Page() {
          Mise à jour 27/05 : En raison d'une sortie scolaire, les matchs du 01/06 et du 02/06 ont été inversés.
         </p>
       </div>
+
+      {/* BLOC REMISE DES RÉCOMPENSES (TEXTE SIMPLIFIÉ) */}
+      <div className={styles.apercuRewardSection}>
+        <div className={styles.apercuRewardCardFull}>
+          <div className={styles.apercuRuleHeader}>
+            <span className={styles.apercuInfoEmoji}>🏆</span>
+            <h3 className={styles.apercuRewardTitle}>Cérémonie de Clôture</h3>
+          </div>
+          <p className={styles.apercuRuleDescription}>
+            <strong>Événement de fin de tournoi :</strong> Rassemblement de toutes les équipes pour procéder à la remise de toutes les récompenses.
+          </p>
+          <div className={styles.apercuRewardBadge}>
+            📅 Lundi 29 Juin
+          </div>
+        </div>
+      </div>
+
       {/* SECTION DES RÈGLES */}
       <section className={styles.apercuRulesSection}>
         <h2 className={styles.apercuRulesLabel}>Règles du Tournoi</h2>
@@ -31,25 +48,24 @@ export default function Page() {
         <div className={styles.apercuRulesGrid}>
           
           {/* Règle 1: Effectifs et Durée Classique */}
-<div className={styles.apercuRuleCard}>
-  <div className={styles.apercuRuleHeader}>
-    <span className={styles.apercuRuleIndex}>01</span>
-    <h3 className={styles.apercuRuleTitle}>Format des Matchs</h3>
-  </div>
-  <p className={styles.apercuRuleDescription}>
-    <strong>Durée :</strong> 10 min / 5 min (repos) / 10 min.
-  </p>
-  <p className={styles.apercuRuleDescription}>
-    <strong>Effectif :</strong> 5 joueurs de base.
-  </p>
-  {/* Ajout de la règle pour les CP */}
-  <p className={styles.apercuRuleDescription}>
-    <strong>Spécificité CP :</strong> Les buts comptent double.
-  </p>
-  <div className={styles.apercuLevelBadge}>
-    +1 joueur par écart de niveau de classe
-  </div>
-</div>
+          <div className={styles.apercuRuleCard}>
+            <div className={styles.apercuRuleHeader}>
+              <span className={styles.apercuRuleIndex}>01</span>
+              <h3 className={styles.apercuRuleTitle}>Format des Matchs</h3>
+            </div>
+            <p className={styles.apercuRuleDescription}>
+              <strong>Durée :</strong> 10 min / 5 min (repos) / 10 min.
+            </p>
+            <p className={styles.apercuRuleDescription}>
+              <strong>Effectif :</strong> 5 joueurs de base.
+            </p>
+            <p className={styles.apercuRuleDescription}>
+              <strong>Spécificité CP :</strong> Les buts comptent double.
+            </p>
+            <div className={styles.apercuLevelBadge}>
+              +1 joueur par écart de niveau de classe
+            </div>
+          </div>
 
           {/* Règle 2: Phases Finales & Finale Spéciale */}
           <div className={styles.apercuRuleCard}>

@@ -68,6 +68,51 @@
   backdrop-filter: blur(10px);
 }
 
+/* --- BLOC REMISE DES RÉCOMPENSES CENTRALISÉ ET RÉDUIT --- */
+
+.apercuRewardSection {
+  width: 100%;
+  display: flex;
+  justify-content: center; /* Centre le bloc sur les grands écrans */
+  margin-bottom: 40px;
+}
+
+.apercuRewardCardFull {
+  background: rgba(234, 179, 8, 0.04);
+  border: 1px solid rgba(234, 179, 8, 0.3);
+  border-left: 5px solid #eab308;
+  border-radius: 12px;
+  padding: 18px 25px; /* Épaisseur légèrement réduite */
+  backdrop-filter: blur(10px);
+  width: 100%;
+  max-width: 600px; /* Limite la largeur pour éviter que ce soit trop grand */
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.apercuRewardCardFull:hover {
+  background: rgba(234, 179, 8, 0.07);
+  transform: translateY(-2px);
+}
+
+.apercuRewardTitle {
+  margin: 0;
+  font-size: 1.15rem; /* Typo légèrement plus compacte */
+  font-weight: 700;
+  color: #eab308;
+}
+
+.apercuRewardBadge {
+  display: inline-block;
+  background: #eab308;
+  color: #0f172a;
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  margin-top: 15px;
+  box-shadow: 0 0 12px rgba(234, 179, 8, 0.25);
+}
+
 .apercuInfoEmoji {
   font-size: 1.5rem;
 }
