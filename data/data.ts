@@ -136,6 +136,6 @@ export const initialPetiteFinale: Match = { eq1: "", score1: null, tab1: null, e
 
 export const initialMatchsSpeciaux: Match[] = [
   { eq1: "Animateurs", score1: null, eq2: "Parents", score2: null, poule: "Spécial", date: "19 Juin", label: "MATCH ALLER ANIMATEURS VS PARENTS" },
-  { eq1: "Algérie", score1: null, eq2: "Portugal", score2: null, poule: "Spécial", date: "22 Juin", label: "COUPE DU FAIR-PLAY" },
-  { eq1: "Parents", score1: null, eq2: "Animateurs", score2: null, poule: "Spécial", date: "25 Juin", label: "MATCH RETOUR ANIMATEURS VS PARENTS" }
+  { eq1: "Algérie", score1: null, tab1: null, eq2: "Portugal", score2: null, tab2: null, poule: "Spécial", date: "22 Juin", label: "COUPE DU FAIR-PLAY" },
+  { eq1: "Parents", score1: null, tab1: null, eq2: "Animateurs", score2: null, tab2: null, poule: "Spécial", date: "25 Juin", label: "MATCH RETOUR ANIMATEURS VS PARENTS" }
 ];
