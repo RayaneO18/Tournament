@@ -36,7 +36,7 @@ export default function Page() {
             <strong>Événement de fin de tournoi :</strong> Rassemblement de toutes les équipes pour procéder à la remise de toutes les récompenses.
           </p>
           <div className={styles.apercuRewardBadge}>
-            📅 Lundi 29 Juin
+            Lundi 29 Juin
           </div>
         </div>
       </div>
