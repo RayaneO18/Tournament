@@ -148,28 +148,8 @@ export default function CoupeCPPage() {
           </div>
 
           {/* Match 2 */}
-          <div className={styles.cpMatchCard}>
+              <div className={styles.cpMatchCard}>
             <span className={styles.cpMatchHeader}>Match 2</span>
-            <div className={styles.cpMatchBody}>
-              <div className={`${styles.cpMatchTeam} ${styles.cpMatchTeamLeft}`}>
-                <span className={styles.cpMatchTeamName}>Allemagne</span>
-                <img src={`/flags/${drapeaux["Allemagne"]}`} alt="Allemagne" className={styles.cpMatchFlag} />
-              </div>
-              <div className={styles.cpMatchScoreBox}>
-                <span>0</span>
-                <span>-</span>
-                <span>0</span>
-              </div>
-              <div className={`${styles.cpMatchTeam} ${styles.cpMatchTeamRight}`}>
-                <img src={`/flags/${drapeaux["Japon"]}`} alt="Japon" className={styles.cpMatchFlag} />
-                <span className={styles.cpMatchTeamName}>Japon</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Match 3 */}
-          <div className={styles.cpMatchCard}>
-            <span className={styles.cpMatchHeader}>Match 3</span>
             <div className={styles.cpMatchBody}>
               <div className={`${styles.cpMatchTeam} ${styles.cpMatchTeamLeft}`}>
                 <span className={styles.cpMatchTeamName}>France</span>
@@ -183,6 +163,27 @@ export default function CoupeCPPage() {
               <div className={`${styles.cpMatchTeam} ${styles.cpMatchTeamRight}`}>
                 <img src={`/flags/${drapeaux["Allemagne"]}`} alt="Allemagne" className={styles.cpMatchFlag} />
                 <span className={styles.cpMatchTeamName}>Allemagne</span>
+              </div>
+            </div>
+          </div>
+          
+
+          {/* Match 3 */}
+      <div className={styles.cpMatchCard}>
+            <span className={styles.cpMatchHeader}>Match 3</span>
+            <div className={styles.cpMatchBody}>
+              <div className={`${styles.cpMatchTeam} ${styles.cpMatchTeamLeft}`}>
+                <span className={styles.cpMatchTeamName}>Allemagne</span>
+                <img src={`/flags/${drapeaux["Allemagne"]}`} alt="Allemagne" className={styles.cpMatchFlag} />
+              </div>
+              <div className={styles.cpMatchScoreBox}>
+                <span>0</span>
+                <span>-</span>
+                <span>0</span>
+              </div>
+              <div className={`${styles.cpMatchTeam} ${styles.cpMatchTeamRight}`}>
+                <img src={`/flags/${drapeaux["Japon"]}`} alt="Japon" className={styles.cpMatchFlag} />
+                <span className={styles.cpMatchTeamName}>Japon</span>
               </div>
             </div>
           </div>
