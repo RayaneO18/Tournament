@@ -1,4 +1,4 @@
-import { groupesBase, calendrierMatchs, Match } from "./data";
+import { groupesBase, calendrierMatchs, Match, matchCoupeCP } from "./data";
 
 // Tableau centralisé des équipes avec correction stricte des chaînes
 export const donneesEquipes = [
@@ -95,7 +95,6 @@ export const getWinner = (m: Match): string | null => {
   if (m.score1 > m.score2) return m.eq1;
   if (m.score2 > m.score1) return m.eq2;
   
-  // Correction TypeScript pour éviter le bug du "possiblement null"
   if (m.tab1 !== undefined && m.tab1 !== null && m.tab2 !== undefined && m.tab2 !== null) {
     if (Number(m.tab1) > Number(m.tab2)) return m.eq1;
     if (Number(m.tab2) > Number(m.tab1)) return m.eq2;
@@ -110,4 +109,43 @@ export const getLoser = (m: Match): string | null => {
   const winner = getWinner(m);
   if (!winner) return null;
   return winner === m.eq1 ? m.eq2 : m.eq1;
+};
+
+// --- LOGIQUE SPÉCIFIQUE COUPE DES CP ---
+export const getStatsCoupeCP = () => {
+  const statsCP = [
+    { pays: "France", classe: "CPA", flag: "France.png", g: 0, n: 0, p: 0, bp: 0, bc: 0, pts: 0 },
+    { pays: "Japon", classe: "CPB", flag: "Japon.png", g: 0, n: 0, p: 0, bp: 0, bc: 0, pts: 0 },
+    { pays: "Allemagne", classe: "CPC", flag: "Allemagne.png", g: 0, n: 0, p: 0, bp: 0, bc: 0, pts: 0 },
+  ];
+
+  matchCoupeCP.forEach(match => {
+    const t1 = statsCP.find(e => e.pays === match.eq1);
+    const t2 = statsCP.find(e => e.pays === match.eq2);
+
+    if (t1 && t2 && match.score1 !== null && match.score2 !== null) {
+      t1.bp += match.score1;
+      t1.bc += match.score2;
+      t2.bp += match.score2;
+      t2.bc += match.score1;
+
+      if (match.score1 > match.score2) {
+        t1.g += 1; t1.pts += 4;
+        t2.p += 1; t2.pts += 1;
+      } else if (match.score1 < match.score2) {
+        t2.g += 1; t2.pts += 4;
+        t1.p += 1; t1.pts += 1;
+      } else {
+        t1.n += 1; t1.pts += 2;
+        t2.n += 1; t2.pts += 2;
+      }
+    }
+  });
+
+  return statsCP.sort((a, b) => {
+    if (b.pts !== a.pts) return b.pts - a.pts;
+    const diffA = a.bp - a.bc;
+    const diffB = b.bp - b.bc;
+    return diffB - diffA;
+  });
 };

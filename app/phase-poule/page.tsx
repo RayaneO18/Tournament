@@ -53,9 +53,6 @@ export default function GroupesPage() {
             return 0;
           });
 
-          // CALCUL DYNAMIQUE DU NOMBRE DE MATCHS ATTENDUS
-          // Si 4 équipes -> 12 entrées de stats cumulées (4 x 3 matchs)
-          // Si 3 équipes -> 6 entrées de stats cumulées (3 x 2 matchs)
           const nbEquipes = poule.equipes.length;
           const matchesAttendus = nbEquipes === 4 ? 12 : 6;
 
