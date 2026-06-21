@@ -18,10 +18,13 @@ export default function Page() {
           ☔ Certains matchs ont été déplacés en raison de la pluie : certaines journées compteront deux rencontres (deux matchs par jour).
           <br></br>
           <br></br>
-        Mise à jour 19/05 : En raison des intempéries, les matchs du 19/05 ainsi que d'autres rencontres ont dû être déplacés. Veuillez consulter le nouveau calendrier.
+        Mis à jour le 19/05 : En raison des intempéries, les matchs du 19/05 ainsi que d'autres rencontres ont dû être déplacés. Veuillez consulter le nouveau calendrier.
           <br></br>
           <br></br>
-         Mise à jour 27/05 : En raison d'une sortie scolaire, les matchs du 01/06 et du 02/06 ont été inversés.
+         Mis à jour le 27/05 : En raison d'une sortie scolaire, les matchs du 01/06 et du 02/06 ont été inversés.
+          <br></br>
+          <br></br>
+          Mis à jour le 21/06 : Pour la sécurité de tous face à la canicule, la rencontre du 22 juin et celle du 23 juin sont reportées à une date ultérieure.
         </p>
       </div>
 
