@@ -25,6 +25,9 @@ export default function Page() {
           <br></br>
           <br></br>
           Mis à jour le 21/06 : Pour la sécurité de tous face à la canicule, la rencontre du 22 juin et celle du 23 juin sont reportées à une date ultérieure.
+          <br></br>
+          <br></br>
+          Mis à jour le 24/06 : La canicule frappe encore, la rencontre du 25 juin et celle du 26 juin sont reportées à un date ultérieure.
         </p>
       </div>
 
