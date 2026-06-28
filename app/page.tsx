@@ -28,6 +28,9 @@ export default function Page() {
           <br></br>
           <br></br>
           Mis à jour le 24/06 : La canicule frappe encore, la rencontre du 25 juin et celle du 26 juin sont reportées à un date ultérieure.
+          <br></br>
+          <br></br>
+          Mis à jour le 28/06 : De nouvelles dates ont été fixées pour la finale, la 3ème place, la Coupe du fair-play et la cérémonie de clôture.
         </p>
       </div>
 
@@ -42,7 +45,7 @@ export default function Page() {
             <strong>Événement de fin de tournoi :</strong> Rassemblement de toutes les équipes pour procéder à la remise de toutes les récompenses.
           </p>
           <div className={styles.apercuRewardBadge}>
-            Lundi 29 Juin
+            Vendredi 3 juillet
           </div>
         </div>
       </div>
