@@ -130,7 +130,7 @@ export const initialDemis: Match[] = [
   { eq1: "", score1: 4, tab1: null, eq2: "", score2: 1, tab2: null, poule: "Demi-finale", date: "16 Juin" },
 ];
 
-export const initialFinale: Match = { eq1: "", score1: null, tab1: null, eq2: "", score2: null, tab2: null, poule: "Finale", date: "2 juillet" };
+export const initialFinale: Match = { eq1: "", score1: 0, tab1: 0, eq2: "", score2: 0, tab2: 1, poule: "Finale", date: "2 juillet" };
 
 export const initialPetiteFinale: Match = { eq1: "", score1: 1, tab1: null, eq2: "", score2: 0, tab2: null, poule: "3ème place", date: "30 juin" };
 
